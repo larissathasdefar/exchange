@@ -43,14 +43,14 @@ class CustomStepper extends PureComponent {
   }
 
   renderActualStep = () => {
-    const { steps, align } = this.props
+    const { steps, align, textStyle } = this.props
     const { activeStep } = this.state
     return (
       <Content>
-        <Typography align={align} variant="h4">
+        <Typography align={align} variant="h4" style={textStyle}>
           { steps[activeStep].title }
         </Typography>
-        <Typography align={align} variant="caption">
+        <Typography align={align} variant="caption" style={textStyle}>
           { steps[activeStep].subtitle }
         </Typography>
       </Content>
@@ -89,8 +89,6 @@ class CustomStepper extends PureComponent {
 CustomStepper.defaultProps = {
   align: 'inherit',
   start: 0,
-  renderStep: undefined,
-  onChangeStep: undefined,
 }
 
 CustomStepper.propTypes = {
@@ -101,6 +99,7 @@ CustomStepper.propTypes = {
     }),
   ).isRequired,
   align: _.string,
+  textStyle: _.shape({}),
   renderStep: _.func,
   start: _.number,
   onChangeStep: _.func,

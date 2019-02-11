@@ -12,9 +12,9 @@ const App = () => (
     <HeadBar />
     <Router>
       <Switch>
-        <Route exact path="/" render={() => <Redirect to="/exchange" />} />
-        <Route exact path="/exchange" component={props => <Home {...props} />} />
-        <Route exact path="/exchange/:from/to/:to" component={props => <Exchange {...props} />} />
+        <Route exact path="/" render={() => <Redirect to="/currencies" />} />
+        <Route exact path="/currencies" component={props => <Home {...props} />} />
+        <Route exact path="/exchange" component={props => <Exchange {...props} />} />
       </Switch>
     </Router>
   </div>
