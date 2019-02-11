@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import MobileStepper from '@material-ui/core/MobileStepper'
+import Button from '@material-ui/core/Button'
 
 export const Container = styled.div`
   min-height: 150px;
@@ -19,9 +20,16 @@ export const Content = styled.div`
 export const StepContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `
 
 export const Progress = styled(MobileStepper)`
   background-color: transparent !important;
   justify-content: center !important;
+`
+
+export const SmallButton = styled(Button)`
+  && {
+    min-width: 32px;
+  }
 `

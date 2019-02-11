@@ -1,6 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
 import _ from 'prop-types'
-import Button from '@material-ui/core/Button'
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
 import Typography from '@material-ui/core/Typography'
@@ -9,6 +8,7 @@ import {
   Content,
   StepContainer,
   Progress,
+  SmallButton,
 } from './Stepper.styles'
 
 class CustomStepper extends PureComponent {
@@ -64,17 +64,17 @@ class CustomStepper extends PureComponent {
     return (
       <Container>
         <StepContainer>
-          <Button onClick={this.handleBack}>
+          <SmallButton onClick={this.handleBack}>
             <KeyboardArrowLeft />
-          </Button>
+          </SmallButton>
           {
             renderStep
               ? renderStep(steps[activeStep])
               : this.renderActualStep()
           }
-          <Button onClick={this.handleNext}>
+          <SmallButton onClick={this.handleNext}>
             <KeyboardArrowRight />
-          </Button>
+          </SmallButton>
         </StepContainer>
         <Progress
           steps={maxSteps}
