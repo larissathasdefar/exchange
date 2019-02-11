@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import MoneyIcon from '@material-ui/icons/AttachMoney'
-import Stepper from '../UI/Stepper'
+import Stepper from 'ui/Stepper'
 import {
   Container,
   Currency,

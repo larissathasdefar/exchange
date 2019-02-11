@@ -1,8 +1,7 @@
 import React from 'react'
 import _ from 'prop-types'
 import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import Stepper from '../UI/Stepper'
+import Stepper from 'ui/Stepper'
 import {
   Container,
   Content,

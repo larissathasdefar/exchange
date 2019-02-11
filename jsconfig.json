@@ -4,5 +4,11 @@
       "target": "ES6",
       "module": "commonjs",
       "allowSyntheticDefaultImports": true,
+      "paths": {
+        "assets/*": ["src/assets/*"],
+        "ui/*": ["src/components/ui/*"],
+        "components/*": ["src/components/*"],
+        "redux/*": ["src/redux/*"],
+      },
   }
 }

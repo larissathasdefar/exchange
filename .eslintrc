@@ -30,5 +30,17 @@
     "import/no-dynamic-require": ["off"],
     "import/no-named-as-default": 0,
     "no-use-before-define": ["error", { "functions": true, "classes": true, "variables": true }]
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["assets", "./src/assets"],
+          ["components", "./src/components"],
+          ["ui", "./src/components/ui"],
+          ["redux", "./src/redux"]
+        ]
+      }
+     }
   }
 }

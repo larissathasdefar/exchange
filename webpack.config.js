@@ -33,6 +33,12 @@ module.exports = env => {
     ],
     resolve: {
       extensions: ['.js', '.jsx'],
+      alias: {
+        assets: path.resolve(__dirname, 'src/assets'),
+        components: path.resolve(__dirname, 'src/components'),
+        'ui': path.resolve(__dirname, 'src/components/UI'),
+      },
+      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     },
     devtool: 'inline-source-map',
     devServer: {

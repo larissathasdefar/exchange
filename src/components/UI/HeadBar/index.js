@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react'
 import _ from 'prop-types'
-import Logo from '../../../assets/revolut.png'
+import Logo from 'assets/revolut.png'
 import AccountIcon from '@material-ui/icons/AccountCircle'
 import Typography from '@material-ui/core/Typography'
 import {
