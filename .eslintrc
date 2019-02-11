@@ -13,7 +13,7 @@
         "WhileStatement",
         "SwitchStatement",
         "VariableDeclaration[kind='var']",
-        "VariableDeclaration[kind= let']",
+        "VariableDeclaration[kind='let']",
         "WithStatement"
     ],
     "semi": ["error", "never"],
@@ -28,6 +28,7 @@
     "unicorn/no-abusive-eslint-disable": ["off"],
     "import/prefer-default-export": ["off"],
     "import/no-dynamic-require": ["off"],
-    "import/no-named-as-default": 0
+    "import/no-named-as-default": 0,
+    "no-use-before-define": ["error", { "functions": true, "classes": true, "variables": true }]
   }
 }
