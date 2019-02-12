@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import _ from 'prop-types'
 import { connect } from 'react-redux'
 import Home from 'components/Home'
-import Loading from 'components/Loading'
+import Loading from 'ui/Loading'
 import Typography from '@material-ui/core/Typography'
 
 class HomeContainer extends Component {

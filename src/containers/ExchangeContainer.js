@@ -3,7 +3,7 @@ import _ from 'prop-types'
 import { connect } from 'react-redux'
 import { loadRates } from 'actions/currencies'
 import Exchange from 'components/Exchange'
-import Loading from 'components/Loading'
+import Loading from 'ui/Loading'
 import Typography from '@material-ui/core/Typography'
 
 class ExchangeContainer extends Component {
@@ -54,8 +54,8 @@ ExchangeContainer.propTypes = {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onLoadRates: base => {
-    dispatch(loadRates(base))
+  onLoadRates: () => {
+    dispatch(loadRates())
   },
 })
 
@@ -64,6 +64,7 @@ const mapStateToProps = state => ({
   currencies: state.currencies.names,
   loading: state.currencies.loadingNames,
   error: state.currencies.errorNames,
+  rates: state.currencies.rates,
   loadingRates: state.currencies.loadingRates,
   errorRates: state.currencies.errorRates,
 })
