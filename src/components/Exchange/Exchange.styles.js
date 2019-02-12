@@ -30,6 +30,13 @@ export const Complement = styled.div`
   min-width: 150px;
 `
 
+export const LoadingContainer = styled(Complement)`
+  & div {
+    height: 67px;
+    align-items: baseline;
+  }
+`
+
 export const StepContainer = styled.div`
   width: fit-content;
   margin: 0 auto;

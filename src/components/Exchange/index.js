@@ -15,6 +15,7 @@ import {
   ButtonsContainer,
   Cancel,
   ExchangeIcon,
+  LoadingContainer,
 } from './Exchange.styles'
 import Tooltip from '@material-ui/core/Tooltip'
 import Dialog from '@material-ui/core/Dialog'
@@ -175,9 +176,13 @@ class Exchange extends PureComponent {
           </Typography>
         </Currency>
         {
-          !loadingRates && Object.keys(rates).length
+          Object.keys(rates).length
             ? from ? this.renderField(max) : this.renderConversion()
-            : <Loading />
+            : (
+              <LoadingContainer>
+                <Loading />
+              </LoadingContainer>
+            )
         }
       </CurrencyContainer>
     )
