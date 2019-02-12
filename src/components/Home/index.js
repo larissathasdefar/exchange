@@ -9,26 +9,30 @@ import {
   WhiteText,
 } from './Home.styles'
 
-const currencies = [
-  { name: 'American Dollar', symbol: '$', code: 'USD' },
-  { name: 'British Pound', symbol: '£', code: 'GPB' },
-  { name: 'Euro', symbol: '€', code: 'EUR' },
-]
+const formatMoney = (amount, currency) => amount
+  .toLocaleString(undefined, { style: 'currency', currency: currency })
 
-const Home = ({ history }) => {
+const Home = ({ user, currencies, history, loading, error }) => {
+  // TODO: Should I verify here loading and error?
   return (
     <Container elevation={1}>
       <Content>
-        <WhiteText variant="h4" paragraph>Currencies</WhiteText>
-        <Stepper
-          steps={[
-            { title: '£48.54', subtitle: 'GPB - British Pound', code: 'GPB' },
-            { title: '€138.40', subtitle: 'EUR - Euro', code: 'EUR' },
-            { title: '$60.00', subtitle: 'USD - American Dollar', code: 'USD' },
-          ]}
-          align="center"
-          textStyle={{ color: '#FFFFFF', fontWeight: '100' }}
-        />
+        <WhiteText variant="h4" paragraph>Pockets</WhiteText>
+        {
+          user.pockets.length && (
+            <Stepper
+              steps={
+                user.pockets.map(({ amount, code }) => ({
+                  title: `${formatMoney(amount, code)}`,
+                  subtitle: `${code} - ${currencies[code]}`,
+                  code,
+                }))
+              }
+              align="center"
+              textStyle={{ color: '#FFFFFF', fontWeight: '100' }}
+            />
+          )
+        }
       </Content>
       <Actions>
         <Button

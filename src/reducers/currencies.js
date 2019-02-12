@@ -21,7 +21,7 @@ const currencies = (state = initial, action) => {
   case SET_CURRENCIES:
     return {
       ...state,
-      names: action.currencies,
+      names: action.currencies.symbols,
       loadingNames: false,
     }
   case SET_RATES:

@@ -9,9 +9,9 @@ class AppBarContainer extends Component {
   componentDidMount () {
     const { onSetUser, onLoadCurrencies } = this.props
     onSetUser({
-      currencies: [
+      pockets: [
         { code: 'USD', amount: 44.90 },
-        { code: 'GPB', amount: 50.56 },
+        { code: 'GBP', amount: 50.56 },
         { code: 'EUR', amount: 90.06 },
       ],
       photo: '',
@@ -32,7 +32,7 @@ AppBarContainer.propTypes = {
   user: _.shape({
     name: _.string,
     photo: _.string,
-    currencies: _.arrayOf(
+    pockets: _.arrayOf(
       _.shape({
         code: _.string,
         amount: _.number,

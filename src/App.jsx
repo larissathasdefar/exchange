@@ -10,7 +10,7 @@ import {
   Redirect,
 } from 'react-router-dom'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-import Home from 'components/Home'
+import Home from 'containers/HomeContainer'
 import Exchange from 'components/Exchange'
 import AppBar from 'containers/AppBarContainer'
 import rootReducer from './reducers'
@@ -37,9 +37,10 @@ const App = () => (
       <AppBar />
       <Router>
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/currencies" />} />
-          <Route exact path="/currencies" component={props => <Home {...props} />} />
+          <Route exact path="/" render={() => <Redirect to="/pockets" />} />
+          <Route exact path="/pockets" component={props => <Home {...props} />} />
           <Route exact path="/exchange" component={props => <Exchange {...props} />} />
+          <Route exact path='*' render={() => <Redirect to="/pockets" />} />
         </Switch>
       </Router>
     </Provider>

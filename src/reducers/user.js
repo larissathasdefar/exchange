@@ -1,7 +1,7 @@
 import { SET_USER } from 'constants'
 
 const initial = {
-  currencies: [],
+  pockets: [],
   photo: '',
   name: '',
 }
