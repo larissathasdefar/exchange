@@ -28,6 +28,21 @@ class AppBarContainer extends Component {
   }
 }
 
+AppBarContainer.propTypes = {
+  user: _.shape({
+    name: _.string,
+    photo: _.string,
+    currencies: _.arrayOf(
+      _.shape({
+        code: _.string,
+        amount: _.number,
+      }),
+    ),
+  }).isRequired,
+  onSetUser: _.func.isRequired,
+  onLoadCurrencies: _.func.isRequired,
+}
+
 const mapDispatchToProps = dispatch => ({
   onSetUser: user => {
     dispatch(setUser(user))
