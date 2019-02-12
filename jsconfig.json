@@ -8,7 +8,9 @@
         "assets/*": ["src/assets/*"],
         "ui/*": ["src/components/ui/*"],
         "components/*": ["src/components/*"],
-        "redux/*": ["src/redux/*"],
+        "reducers/*": ["src/reducers/*"],
+        "actions/*": ["src/actions/*"],
+        "constants/*": ["src/constants/action-types.js"],
       },
   }
 }

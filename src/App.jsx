@@ -1,14 +1,25 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import {
-  HashRouter as Router, Route, Switch, Redirect,
+  HashRouter as Router,
+  Route,
+  Switch,
+  Redirect,
 } from 'react-router-dom'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import Home from './components/Home'
 import Exchange from './components/Exchange'
 import HeadBar from './components/UI/HeadBar'
+import rootReducer from './reducers'
+
+const store = createStore(rootReducer)
 
 const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
   palette: {
     primary: {
       main: '#2196f3',
@@ -21,14 +32,16 @@ const theme = createMuiTheme({
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
-    <HeadBar />
-    <Router>
-      <Switch>
-        <Route exact path="/" render={() => <Redirect to="/currencies" />} />
-        <Route exact path="/currencies" component={props => <Home {...props} />} />
-        <Route exact path="/exchange" component={props => <Exchange {...props} />} />
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <HeadBar />
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to="/currencies" />} />
+          <Route exact path="/currencies" component={props => <Home {...props} />} />
+          <Route exact path="/exchange" component={props => <Exchange {...props} />} />
+        </Switch>
+      </Router>
+    </Provider>
   </MuiThemeProvider>
 )
 
