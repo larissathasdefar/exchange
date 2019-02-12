@@ -1,6 +1,6 @@
 import {
   SET_CURRENCIES,
-  SET_RATE,
+  SET_RATES,
   START_LOADING_CURRENCIES,
   START_LOADING_RATES,
   SET_ERROR_CURRENCIES,
@@ -8,7 +8,7 @@ import {
 } from 'constants'
 
 const initial = {
-  names: [],
+  names: {},
   rates: {},
   loadingNames: false,
   loadingRates: false,
@@ -21,13 +21,13 @@ const currencies = (state = initial, action) => {
   case SET_CURRENCIES:
     return {
       ...state,
-      names: action.data.result,
+      names: action.currencies,
       loadingNames: false,
     }
-  case SET_RATE:
+  case SET_RATES:
     return {
       ...state,
-      rates: action.data.result,
+      rates: action.rates,
       loadingRates: false,
     }
   case START_LOADING_CURRENCIES:

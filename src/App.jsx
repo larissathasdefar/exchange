@@ -1,7 +1,8 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
 import {
   HashRouter as Router,
   Route,
@@ -14,7 +15,7 @@ import Exchange from 'components/Exchange'
 import AppBar from 'containers/AppBarContainer'
 import rootReducer from './reducers'
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 const theme = createMuiTheme({
   typography: {
