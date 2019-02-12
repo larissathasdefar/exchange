@@ -164,7 +164,7 @@ class Exchange extends PureComponent {
   }
 
   renderCurrency = ({ title, subtitle, from, max }) => {
-    const { loadingRates, rates } = this.props
+    const { rates } = this.props
     return (
       <CurrencyContainer>
         <Currency>
@@ -203,14 +203,7 @@ class Exchange extends PureComponent {
   }
 
   render() {
-    const {
-      user,
-      history,
-      currencies,
-      rates,
-      loadingRates,
-      onLoadRates,
-    } = this.props
+    const { user, history } = this.props
     const { from, to } = this.state
     const getSteps = type => user.pockets.map(({ amount, code }) => ({
       title: code,

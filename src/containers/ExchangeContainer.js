@@ -23,12 +23,10 @@ class ExchangeContainer extends Component {
   render () {
     const {
       user,
-      currencies,
       history,
       loading,
       error,
       rates,
-      loadingRates,
       errorRates,
       onLoadRates,
     } = this.props
@@ -40,9 +38,7 @@ class ExchangeContainer extends Component {
         <Exchange
           user={user}
           history={history}
-          currencies={currencies}
           rates={rates}
-          loadingRates={loadingRates}
           onLoadRates={onLoadRates}
         />
       )
@@ -61,11 +57,9 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   user: state.user,
-  currencies: state.currencies.names,
   loading: state.currencies.loadingNames,
   error: state.currencies.errorNames,
   rates: state.currencies.rates,
-  loadingRates: state.currencies.loadingRates,
   errorRates: state.currencies.errorRates,
 })
 
