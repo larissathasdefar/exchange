@@ -16,11 +16,31 @@ import {
   Cancel,
   ExchangeIcon,
 } from './Exchange.styles'
+import Tooltip from '@material-ui/core/Tooltip'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+
+const formatMoney = (amount, currency) => amount
+  .toLocaleString(undefined, { style: 'currency', currency: currency })
+
+const START_STEP_FROM = 0
+const START_STEP_TO = 1
+const getStepTo = pockets => pockets.length === 1 ? 0 : START_STEP_TO
 
 class Exchange extends PureComponent {
   state={
     convert: '',
     openConfirmation: false,
+    from: this.props.user.pockets[START_STEP_FROM].code,
+    to: this.props.user.pockets[getStepTo(this.props.user.pockets)].code,
+  }
+  // TODO: create a function to set initial state
+
+  componentDidMount() {
+    // TODO: start setTimeout to load rate
   }
 
   handleToggleConfirmation = () => {
@@ -37,6 +57,43 @@ class Exchange extends PureComponent {
     if (parseFloat(value) || value === '') {
       this.setState({ convert: value })
     }
+  }
+
+  handleChangeStep = (index, currency) => {
+    return currency.from
+      ? this.setState({ from: currency.title })
+      : this.setState({ to: currency.title })
+  }
+
+  renderConfirmation = () => {
+    const { convert, from, openConfirmation } = this.state
+    return (
+      <Dialog
+        open={openConfirmation}
+        onClose={this.handleToggleConfirmation}>
+        <DialogTitle>{`Do you want to confirm the exchange ${formatMoney(convert, from)}?`}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            If you confirm you will not be able to undo this transaction later.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Cancel
+            variant="outlined"
+            color="secondary"
+            onClick={this.handleToggleConfirmation}>
+            Cancel
+          </Cancel>
+          <Button
+            autoFocus
+            variant="contained"
+            color="primary"
+            onClick={this.handleConfirm}>
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
+    )
   }
 
   renderField = max => {
@@ -81,7 +138,6 @@ class Exchange extends PureComponent {
   }
 
   renderCurrency = ({ title, subtitle, from, max }) => {
-    const { convert } = this.state
     return (
       <CurrencyContainer>
         <Currency>
@@ -97,40 +153,76 @@ class Exchange extends PureComponent {
     )
   }
 
+  renderExchangeButton = () => {
+    const { from, to } = this.state
+    return (
+      <Button
+        variant="contained"
+        color="primary"
+        disabled={from === to}
+        onClick={this.handleToggleConfirmation}>
+        Exchange
+        <MoneyIcon />
+      </Button>
+    )
+  }
+
   render() {
+    const {
+      user,
+      history,
+      currencies,
+      rates,
+      loadingRates,
+      onLoadRates,
+    } = this.props
+    const { from, to } = this.state
+    const getSteps = type => user.pockets.map(({ amount, code }) => ({
+      title: code,
+      subtitle: `You have ${formatMoney(amount, code)}`,
+      max: amount,
+      [type]: true,
+    }))
     return (
       <Container elevation={1}>
         <Typography variant="h4">Let's Exchange</Typography>
         <Typography variant="caption" paragraph>How much would you like to exchange?</Typography>
         <StepContainer>
           <Stepper
-            steps={[
-              { from: true, title: 'GPB', subtitle: 'You have £48.54', max: 48.54 },
-              { from: true, title: 'EUR', subtitle: 'You have €138.40', max: 138.40 },
-              { from: true, title: 'USD', subtitle: 'You have $60.00', max: 60.00 },
-            ]}
+            steps={getSteps('from')}
+            start={START_STEP_FROM}
             renderStep={this.renderCurrency}
+            onChangeStep={this.handleChangeStep}
           />
         </StepContainer>
         <ExchangeIcon />
         <StepContainer>
           <Stepper
-            steps={[
-              { to: true, title: 'GPB', subtitle: 'You have £48.54', max: 48.54 },
-              { to: true, title: 'EUR', subtitle: 'You have €138.40', max: 138.40 },
-              { to: true, title: 'USD', subtitle: 'You have $60.00', max: 60.00 },
-            ]}
-            start={1}
+            steps={getSteps('to')}
+            start={getStepTo(user.pockets)}
             renderStep={this.renderCurrency}
+            onChangeStep={this.handleChangeStep}
           />
         </StepContainer>
         <ButtonsContainer>
-          <Cancel variant="outlined" color="secondary">Cancel</Cancel>
-          <Button variant="contained" color="primary">
-            Exchange
-            <MoneyIcon />
-          </Button>
+          <Cancel
+            variant="outlined"
+            color="secondary"
+            onClick={() => history.push('/pockets')}>
+            Cancel
+          </Cancel>
+          { from === to
+            ? (
+              <Tooltip title="You can't exchange between the same currency">
+                <div>
+                  { this.renderExchangeButton() }
+                </div>
+              </Tooltip>
+            )
+            : this.renderExchangeButton()
+          }
         </ButtonsContainer>
+        { this.renderConfirmation() }
       </Container>
     )
   }

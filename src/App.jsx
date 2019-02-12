@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import Home from 'containers/HomeContainer'
-import Exchange from 'components/Exchange'
+import Exchange from 'containers/ExchangeContainer'
 import AppBar from 'containers/AppBarContainer'
 import rootReducer from './reducers'
 
