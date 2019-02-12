@@ -27,7 +27,7 @@ const currencies = (state = initial, action) => {
   case SET_RATES:
     return {
       ...state,
-      rates: action.rates,
+      rates: action.rates.rates,
       loadingRates: false,
     }
   case START_LOADING_CURRENCIES:
@@ -39,7 +39,7 @@ const currencies = (state = initial, action) => {
   case START_LOADING_RATES:
     return {
       ...state,
-      loadingNames: true,
+      loadingRates: true,
       errorRates: false,
     }
   case SET_ERROR_CURRENCIES:

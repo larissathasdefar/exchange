@@ -22,9 +22,12 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import Loading from 'ui/Loading'
 
 const formatMoney = (amount, currency) => amount
   .toLocaleString(undefined, { style: 'currency', currency: currency })
+
+const exchangeMoney = (from, to, rates) => rates['EUR'] / rates[to] * rates[from]
 
 const START_STEP_FROM = 0
 const START_STEP_TO = 1
@@ -48,6 +51,17 @@ const getInitialState = ({ user }) => ({
 
 class Exchange extends PureComponent {
   state = getInitialState(this.props)
+
+  componentDidMount() {
+    const { onLoadRates } = this.props
+    onLoadRates()
+    // TODO: uncomment the line below
+    // this.interval = setInterval(() => onLoadRates(), 10000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
 
   handleToggleConfirmation = () => {
     this.setState(({ openConfirmation }) => ({ openConfirmation: !openConfirmation }))
@@ -103,7 +117,9 @@ class Exchange extends PureComponent {
   }
 
   renderField = max => {
-    const { convert } = this.state
+    const { convert, to, from } = this.state
+    const { rates } = this.props
+    const rate = exchangeMoney(to, from, rates)
     return (
       <Complement>
         <TextInput
@@ -121,7 +137,7 @@ class Exchange extends PureComponent {
           InputLabelProps={{
             shrink: true,
           }}
-          helperText="X1 = X0.44"
+          helperText={`${formatMoney(1, from)} = ${formatMoney(rate, to)}`}
           onChange={this.handleChange}
         />
       </Complement>
@@ -129,21 +145,25 @@ class Exchange extends PureComponent {
   }
 
   renderConversion = () => {
-    const { convert } = this.state
+    const { convert, to, from } = this.state
+    const { rates } = this.props
     const parsed = parseFloat(convert) || 0
+    const rate = exchangeMoney(from, to, rates)
+    const finalAmount = parsed / rate
     return (
       <Complement>
         <Typography variant="h4" align="right">
-          { `+ ${parsed.toFixed(2)}` }
+          { `+ ${finalAmount.toFixed(2)}` }
         </Typography>
         <Typography variant="subtitle1" align="right">
-          X1 = X0.44
+          {`${formatMoney(1, to)} = ${formatMoney(rate, from)}`}
         </Typography>
       </Complement>
     )
   }
 
   renderCurrency = ({ title, subtitle, from, max }) => {
+    const { loadingRates, rates } = this.props
     return (
       <CurrencyContainer>
         <Currency>
@@ -154,7 +174,11 @@ class Exchange extends PureComponent {
             { subtitle }
           </Typography>
         </Currency>
-        { from ? this.renderField(max) : this.renderConversion() }
+        {
+          !loadingRates && Object.keys(rates).length
+            ? from ? this.renderField(max) : this.renderConversion()
+            : <Loading />
+        }
       </CurrencyContainer>
     )
   }
