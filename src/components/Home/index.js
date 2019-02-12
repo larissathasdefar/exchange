@@ -12,8 +12,7 @@ import {
 const formatMoney = (amount, currency) => amount
   .toLocaleString(undefined, { style: 'currency', currency: currency })
 
-const Home = ({ user, currencies, history, loading, error }) => {
-  // TODO: Should I verify here loading and error?
+const Home = ({ user, currencies, history }) => {
   return (
     <Container elevation={1}>
       <Content>

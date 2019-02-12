@@ -1,22 +1,36 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import _ from 'prop-types'
 import { connect } from 'react-redux'
 import { loadRates } from 'actions/currencies'
 import Home from 'components/Home'
 import Loading from 'components/Loading'
+import Typography from '@material-ui/core/Typography'
 
 class HomeContainer extends Component {
+  renderError = () => {
+    return (
+      <Fragment>
+        <Typography variant="h4" align="center">
+          An error ocurred.
+        </Typography>
+        <Typography variant="h5" align="center">
+          Please, try again later.
+        </Typography>
+      </Fragment>
+    )
+  }
+
   render () {
     const { user, currencies, history, loading, error } = this.props
-    // TODO: Should I verify here loading and error instead of <Home />?
-    return user.pockets.length
+    if (error) {
+      return this.renderError()
+    }
+    return user.pockets.length && !loading
       ? (
         <Home
           user={user}
           history={history}
           currencies={currencies}
-          loading={loading}
-          error={error}
         />
       )
       : <Loading fullHeight />
