@@ -45,6 +45,17 @@ const Home = ({ user, currencies, history }) => {
 }
 
 Home.propTypes = {
+  user: _.shape({
+    name: _.string,
+    photo: _.string,
+    pockets: _.arrayOf(
+      _.shape({
+        amount: _.number,
+        code: _.string
+      })
+    ),
+  }).isRequired,
+  currencies: _.shape({}).isRequired,
   history: _.shape({
     push: _.func.isRequired,
   }).isRequired,
