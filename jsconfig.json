@@ -10,6 +10,7 @@
         "components/*": ["src/components/*"],
         "reducers/*": ["src/reducers/*"],
         "actions/*": ["src/actions/*"],
+        "containers/*": ["src/containers/*"],
         "constants/*": ["src/constants/action-types.js"],
       },
   }

@@ -1,5 +1,4 @@
 import {
-  SET_USER,
   SET_CURRENCIES,
   SET_RATE,
   START_LOADING_CURRENCIES,
@@ -7,11 +6,6 @@ import {
   SET_ERROR_CURRENCIES,
   SET_ERROR_RATES,
 } from 'constants'
-
-export const setUser = user => ({
-  type: SET_USER,
-  user,
-})
 
 export const setCurrencies = currencies => ({
   type: SET_CURRENCIES,

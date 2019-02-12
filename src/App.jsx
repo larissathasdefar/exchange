@@ -9,9 +9,9 @@ import {
   Redirect,
 } from 'react-router-dom'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-import Home from './components/Home'
-import Exchange from './components/Exchange'
-import HeadBar from './components/UI/HeadBar'
+import Home from 'components/Home'
+import Exchange from 'components/Exchange'
+import AppBar from 'containers/AppBarContainer'
 import rootReducer from './reducers'
 
 const store = createStore(rootReducer)
@@ -33,7 +33,7 @@ const theme = createMuiTheme({
 const App = () => (
   <MuiThemeProvider theme={theme}>
     <Provider store={store}>
-      <HeadBar />
+      <AppBar />
       <Router>
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/currencies" />} />

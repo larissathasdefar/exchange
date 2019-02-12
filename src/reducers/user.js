@@ -6,20 +6,10 @@ const initial = {
   name: '',
 }
 
-const user = (state = initial, action, payload) => {
+const user = (state = initial, action) => {
   switch (action.type) {
   case SET_USER:
-    console.log('setting user', action, payload)
-    return {
-      ...state,
-      currencies: [
-        { code: 'USD', amount: 44.90 },
-        { code: 'GPB', amount: 50.56 },
-        { code: 'EUR', amount: 90.06 },
-      ],
-      photo: '',
-      name: '',
-    }
+    return { ...state, ...action.user }
   default:
     return state
   }

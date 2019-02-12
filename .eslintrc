@@ -39,7 +39,8 @@
           ["ui", "./src/components/ui"],
           ["reducers", "./src/reducers"],
           ["actions", "./src/actions"],
-          ["constants", "./src/constants/action-types.js"]
+          ["constants", "./src/constants/action-types.js"],
+          ["containers", "./src/containers"]
         ]
       }
      }
