@@ -28,20 +28,26 @@ const formatMoney = (amount, currency) => amount
 
 const START_STEP_FROM = 0
 const START_STEP_TO = 1
-const getStepTo = pockets => pockets.length === 1 ? 0 : START_STEP_TO
+
+// If the start step was 3 and the user has only 2 pockets,
+// this will return the 3th step item instead of an error
+const reduceExtraSteps = (start, steps) => (
+  steps.length === 1
+    ? 0
+    : start >= steps.length
+      ? start % steps.length
+      : start
+)
+
+const getInitialState = ({ user }) => ({
+  convert: '',
+  openConfirmation: false,
+  from: user.pockets[START_STEP_FROM].code,
+  to: user.pockets[reduceExtraSteps(START_STEP_TO, user.pockets)].code,
+})
 
 class Exchange extends PureComponent {
-  state={
-    convert: '',
-    openConfirmation: false,
-    from: this.props.user.pockets[START_STEP_FROM].code,
-    to: this.props.user.pockets[getStepTo(this.props.user.pockets)].code,
-  }
-  // TODO: create a function to set initial state
-
-  componentDidMount() {
-    // TODO: start setTimeout to load rate
-  }
+  state = getInitialState(this.props)
 
   handleToggleConfirmation = () => {
     this.setState(({ openConfirmation }) => ({ openConfirmation: !openConfirmation }))
@@ -199,7 +205,7 @@ class Exchange extends PureComponent {
         <StepContainer>
           <Stepper
             steps={getSteps('to')}
-            start={getStepTo(user.pockets)}
+            start={START_STEP_TO}
             renderStep={this.renderCurrency}
             onChangeStep={this.handleChangeStep}
           />

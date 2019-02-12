@@ -11,9 +11,19 @@ import {
   SmallButton,
 } from './Stepper.styles'
 
+// If the start step was 3 and the user has only 2 steps,
+// this will return the 3th step item instead of an error
+const reduceExtraSteps = ({ start, steps }) => (
+  steps.length === 1
+    ? 0
+    : start >= steps.length
+      ? start % steps.length
+      : start
+)
+
 class CustomStepper extends PureComponent {
   state = {
-    activeStep: this.props.start,
+    activeStep: reduceExtraSteps(this.props),
   }
 
   componentDidUpdate() {
