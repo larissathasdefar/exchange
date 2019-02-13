@@ -28,9 +28,7 @@ class AppBarContainer extends Component {
 
   render () {
     const { user } = this.props
-    return (
-      <HeadBar user={user} />
-    )
+    return <HeadBar user={user} />
   }
 }
 

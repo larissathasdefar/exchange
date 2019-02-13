@@ -69,13 +69,13 @@ class CustomStepper extends PureComponent {
 
   render() {
     const { activeStep } = this.state
-    const { steps, renderStep } = this.props
+    const { steps, renderStep, iconStyle } = this.props
     const maxSteps = steps.length
     return (
       <Container>
         <StepContainer>
           <SmallButton onClick={this.handleBack}>
-            <KeyboardArrowLeft />
+            <KeyboardArrowLeft style={iconStyle} />
           </SmallButton>
           {
             renderStep
@@ -83,7 +83,7 @@ class CustomStepper extends PureComponent {
               : this.renderActualStep()
           }
           <SmallButton onClick={this.handleNext}>
-            <KeyboardArrowRight />
+            <KeyboardArrowRight style={iconStyle} />
           </SmallButton>
         </StepContainer>
         <Progress
@@ -110,6 +110,7 @@ CustomStepper.propTypes = {
   ).isRequired,
   align: _.string,
   textStyle: _.shape({}),
+  iconStyle: _.shape({}),
   renderStep: _.func,
   start: _.number,
   onChangeStep: _.func,

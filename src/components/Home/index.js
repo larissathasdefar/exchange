@@ -29,6 +29,7 @@ const Home = ({ user, currencies, history }) => {
               }
               align="center"
               textStyle={{ color: '#FFFFFF', fontWeight: '100' }}
+              iconStyle={{ color: '#FFFFFF' }}
             />
           )
         }
