@@ -4,6 +4,7 @@
       "target": "ES6",
       "module": "commonjs",
       "allowSyntheticDefaultImports": true,
+      "baseUrl": "./",
       "paths": {
         "assets/*": ["src/assets/*"],
         "ui/*": ["src/components/ui/*"],

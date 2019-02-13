@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography'
 export const Container = styled(Paper)`
   max-width: 1000px;
   margin: 0 auto;
+  margin-bottom: 14px;
 `
 
 export const Content = styled.div`

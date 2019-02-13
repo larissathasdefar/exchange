@@ -22,6 +22,18 @@ class AppBarContainer extends Component {
         { from: 'EUR', to: 'GBP' },
         { from: 'GBP', to: 'USD' },
       ],
+      transactions: [
+        {
+          from: { code: 'EUR', amount: 15 },
+          to: { code: 'GBP', amount: 3.19 },
+          date: new Date('02/12/2019 08:55'),
+        },
+        {
+          from: { code: 'EUR', amount: 23 },
+          to: { code: 'USD', amount: 26.07 },
+          date: new Date('02/12/2019 14:38'),
+        }
+      ],
     })
     onLoadCurrencies()
   }
