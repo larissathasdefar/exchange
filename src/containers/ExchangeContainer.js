@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import _ from 'prop-types'
 import { connect } from 'react-redux'
 import { loadRates } from 'actions/currencies'
+import { addCurrency } from 'actions/user'
 import Exchange from 'components/Exchange'
 import Rates from 'components/Rates'
 import Loading from 'ui/Loading'
@@ -14,7 +15,31 @@ const Container = styled.div`
   flex-wrap: wrap;
 `
 
+const Updated = styled(Typography)`
+  width: 100%;
+`
+
 class ExchangeContainer extends Component {
+  handleLoadRates = extraCurrency => {
+    const { onLoadRates, user } = this.props
+    const following = extraCurrency
+      ? [...user.followedRates, extraCurrency]
+      : user.followedRates
+    const getUniqueCurrencies = [...new Set(  // Set: array with unique values
+      Object.keys(following).reduce(
+        (r, k) => r.concat(following[k].from, following[k].to),
+        [],
+      ),
+    )]
+    onLoadRates(getUniqueCurrencies)
+  }
+
+  handleAddCurrency = (from, to) => {
+    const { onAddCurrency, user } = this.props
+    this.handleLoadRates({ from, to })
+    onAddCurrency(from, to)
+  }
+
   renderError = () => {
     return (
       <Fragment>
@@ -37,7 +62,6 @@ class ExchangeContainer extends Component {
       currencies,
       rates,
       errorRates,
-      onLoadRates,
     } = this.props
     if (error || errorRates) {
       return this.renderError()
@@ -49,17 +73,18 @@ class ExchangeContainer extends Component {
             user={user}
             history={history}
             rates={rates.list}
-            onLoadRates={onLoadRates}
+            onLoadRates={this.handleLoadRates}
           />
           <Rates
             rates={rates.list}
             currencies={currencies}
             followedRates={user.followedRates}
+            onAddCurrency={this.handleAddCurrency}
           />
           { rates.updatedAt && (
-            <Typography variant="caption" align="center">
+            <Updated variant="caption" align="center">
               {`Updated at ${new Date(rates.updatedAt).toLocaleString()}`}
-            </Typography>
+            </Updated>
           ) }
         </Container>
       )
@@ -91,12 +116,16 @@ ExchangeContainer.propTypes = {
   currencies: _.shape({}).isRequired,
   errorRates: _.bool.isRequired,
   onLoadRates: _.func.isRequired,
+  onAddCurrency: _.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch => ({
-  onLoadRates: () => {
-    dispatch(loadRates())
+  onLoadRates: currencies => {
+    dispatch(loadRates(currencies))
   },
+  onAddCurrency: (from, to) => {
+    dispatch(addCurrency(from, to))
+  }
 })
 
 const mapStateToProps = state => ({

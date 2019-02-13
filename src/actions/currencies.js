@@ -51,10 +51,10 @@ export const loadCurrencies = () => {
   }
 }
 
-export const loadRates = () => {
+export const loadRates = (currencies = 'USD,GBP,EUR') => {
   return dispatch => {
     dispatch(startLoadingRates())
-    return fetch(`http://data.fixer.io/api/latest?access_key=${FIXER_IO_KEY}&symbols=USD,GBP,EUR`)
+    return fetch(`http://data.fixer.io/api/latest?access_key=${FIXER_IO_KEY}&symbols=${currencies}`)
       .then(response => response.json())
       .then(data => {
         if (data.success) {
