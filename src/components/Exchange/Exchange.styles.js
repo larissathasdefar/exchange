@@ -6,8 +6,9 @@ import SwapIcon from '@material-ui/icons/SwapVert'
 
 export const Container = styled(Paper)`
   max-width: calc(600px - 40px);
-  margin: 0 auto;
   padding: 20px 14px;
+  width: 100%
+  margin-bottom: 20px;
 `
 
 export const CurrencyContainer = styled.div`

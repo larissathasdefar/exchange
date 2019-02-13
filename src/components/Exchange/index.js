@@ -28,7 +28,7 @@ import Loading from 'ui/Loading'
 const formatMoney = (amount, currency) => amount
   .toLocaleString(undefined, { style: 'currency', currency: currency })
 
-const exchangeMoney = (from, to, rates) => rates['EUR'] / rates[to] * rates[from]
+const exchangeMoney = (to, from, rates) => rates['EUR'] / rates[from] * rates[to]
 
 const START_STEP_FROM = 0
 const START_STEP_TO = 1
@@ -213,8 +213,12 @@ class Exchange extends PureComponent {
     }))
     return (
       <Container elevation={1}>
-        <Typography variant="h4">Let's Exchange</Typography>
-        <Typography variant="caption" paragraph>How much would you like to exchange?</Typography>
+        <Typography variant="h4" align="center">
+          Let's Exchange
+        </Typography>
+        <Typography variant="caption" align="center" paragraph>
+          How much would you like to exchange?
+        </Typography>
         <StepContainer>
           <Stepper
             steps={getSteps('from')}

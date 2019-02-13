@@ -16,6 +16,12 @@ class AppBarContainer extends Component {
       ],
       photo: '',
       name: 'Larissa Farias',
+      followedRates: [
+        { from: 'USD', to: 'GBP' },
+        { from: 'USD', to: 'EUR' },
+        { from: 'EUR', to: 'GBP' },
+        { from: 'GBP', to: 'USD' },
+      ],
     })
     onLoadCurrencies()
   }

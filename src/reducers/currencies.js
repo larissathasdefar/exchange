@@ -9,7 +9,10 @@ import {
 
 const initial = {
   names: {},
-  rates: {},
+  rates: {
+    list: {},
+    updatedAt: null,
+  },
   loadingNames: false,
   loadingRates: false,
   errorNames: false,
@@ -27,7 +30,10 @@ const currencies = (state = initial, action) => {
   case SET_RATES:
     return {
       ...state,
-      rates: action.rates.rates,
+      rates: {
+        list: action.rates.rates,
+        updatedAt: new Date().getTime(),
+      },
       loadingRates: false,
     }
   case START_LOADING_CURRENCIES:
