@@ -4,6 +4,16 @@ import {
   REMOVE_CURRENCY_USER,
   ADD_TRANSACTION,
 } from 'constants'
+import {
+  append,
+  evolve,
+  findIndex,
+  lensPath,
+  over,
+  pipe,
+  prepend,
+  reject,
+} from 'ramda'
 
 const initial = {
   pockets: [],
@@ -13,12 +23,19 @@ const initial = {
   name: '',
 }
 
-const getNewPocket = (from, to, pockets) => {
-  const pocketFrom = pockets.findIndex(({ code }) => code === from.code)
-  const pocketTo = pockets.findIndex(({ code }) => code === to.code)
-  pockets[pocketFrom].amount = pockets[pocketFrom].amount - from.amount
-  pockets[pocketTo].amount = pockets[pocketTo].amount + to.amount
-  return pockets
+const getNewPocket = (from, to) => pockets => {
+  const pocketFrom = findIndex(({ code }) => code === from.code, pockets)
+  const pocketTo = findIndex(({ code }) => code === to.code, pockets)
+  return pipe(
+    over(
+      lensPath([pocketFrom, 'amount']),
+      amount => amount - from.amount,
+    ),
+    over(
+      lensPath([pocketTo, 'amount']),
+      amount => amount + to.amount,
+    )
+  )(pockets)
 }
 
 const user = (state = initial, action) => {
@@ -26,29 +43,20 @@ const user = (state = initial, action) => {
   case SET_USER:
     return { ...state, ...action.user }
   case ADD_CURRENCY_USER:
-    return {
-      ...state,
-      followedRates: [
-        ...state.followedRates,
-        { from: action.from, to: action.to },
-      ]
-    }
+    return evolve({
+      followedRates: append({ from: action.from, to: action.to })
+    })(state)
   case REMOVE_CURRENCY_USER:
-    return {
-      ...state,
-      followedRates: [...state.followedRates].filter(({ from, to }) => (
-        !(from === action.remove.from && to === action.remove.to)))
-    }
+    return evolve({
+      followedRates: reject(({ from, to }) => from === action.remove.from
+        && to === action.remove.to)
+    })(state)
   case ADD_TRANSACTION:
     const { from, to } = action.transaction
-    return {
-      ...state,
-      pockets: getNewPocket(from, to, [...state.pockets]),
-      transactions: [
-        action.transaction,
-        ...state.transactions,
-      ],
-    }
+    return evolve({
+      pockets: getNewPocket(from, to),
+      transactions: prepend(action.transaction)
+    })(state)
   default:
     return state
   }
