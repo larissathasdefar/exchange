@@ -119,7 +119,7 @@ class Exchange extends PureComponent {
   handleChangeFieldEdit = editingFrom => {
     this.setState({
       editingFrom,
-      convert: `${this.exchangeMoney()}`,
+      convert: `${this.exchangeMoney(editingFrom)}`,
     })
   }
 
