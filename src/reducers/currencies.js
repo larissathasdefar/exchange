@@ -6,6 +6,7 @@ import {
   SET_ERROR_CURRENCIES,
   SET_ERROR_RATES,
 } from 'constants'
+import { mergeDeepRight, mergeRight } from 'ramda'
 
 const initial = {
   names: {},
@@ -22,42 +23,32 @@ const initial = {
 const currencies = (state = initial, action) => {
   switch (action.type) {
   case SET_CURRENCIES:
-    return {
-      ...state,
+    return mergeRight(state, {
       names: action.currencies.symbols,
       loadingNames: false,
-    }
+    })
   case SET_RATES:
-    return {
-      ...state,
+    return mergeDeepRight(state, {
       rates: {
         list: action.rates.rates,
         updatedAt: new Date().getTime(),
       },
       loadingRates: false,
-    }
+    })
   case START_LOADING_CURRENCIES:
-    return {
-      ...state,
+    return mergeRight(state, {
       loadingNames: true,
       errorNames: false,
-    }
+    })
   case START_LOADING_RATES:
-    return {
-      ...state,
+    return mergeRight(state, {
       loadingRates: true,
       errorRates: false,
-    }
+    })
   case SET_ERROR_CURRENCIES:
-    return {
-      ...state,
-      errorNames: true,
-    }
+    return mergeRight(state, { errorNames: true })
   case SET_ERROR_RATES:
-    return {
-      ...state,
-      errorRates: true,
-    }
+    return mergeRight(state, { errorRates: true })
   default:
     return state
   }
