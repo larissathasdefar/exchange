@@ -71,7 +71,7 @@ class Exchange extends PureComponent {
     const { onConfirmExchange } = this.props
     const { from, to, convert } = this.state
     onConfirmExchange(
-      { code: from, amount: parseFloat(convert) },
+      { code: from, amount: parseFloat(convert.replace(',', '.')) },
       { code: to, amount: parseFloat(this.getFinalAmount()) },
     )
     this.setState(({ openConfirmation }) => ({
@@ -82,7 +82,9 @@ class Exchange extends PureComponent {
 
   handleChange = event => {
     const { value } = event.target
-    if (parseFloat(value) || value === '') {
+    const isValidNumber = new RegExp(/^[0-9]+([\.,][0-9]{0,2})?$/gm)
+      .test(value)
+    if (isValidNumber || value === '') {
       this.setState({ convert: value })
     }
   }
@@ -96,7 +98,7 @@ class Exchange extends PureComponent {
   getFinalAmount = () => {
     const { convert, from, to } = this.state
     const { rates } = this.props
-    const parsed = parseFloat(convert) || 0
+    const parsed = parseFloat(convert.replace(',', '.')) || 0
     const rate = exchangeMoney(from, to, rates)
     return (parsed / rate).toFixed(2)
   }
