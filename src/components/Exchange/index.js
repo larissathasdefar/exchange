@@ -1,5 +1,6 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import _ from 'prop-types'
+import { isEmpty } from 'ramda'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import InputAdornment from '@material-ui/core/InputAdornment'
@@ -70,6 +71,9 @@ class Exchange extends PureComponent {
     const { convert, from, to, editingFrom } = this.state
     const { rates } = this.props
     const parsed = parseFloat(convert.replace(',', '.')) || 0
+    if (parsed === 0) {
+      return 0
+    }
     const rate = getRate(from, to, rates)
     const amount = inversed
       ? parsed * rate
@@ -225,15 +229,15 @@ class Exchange extends PureComponent {
           </Typography>
         </Currency>
         {
-          Object.keys(rates).length
-            ? shouldRenderField
-              ? this.renderField()
-              : this.renderConversion()
-            : (
+          isEmpty(rates)
+            ? (
               <LoadingContainer>
                 <Loading />
               </LoadingContainer>
             )
+            : shouldRenderField
+              ? this.renderField()
+              : this.renderConversion()
         }
       </CurrencyContainer>
     )

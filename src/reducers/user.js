@@ -9,6 +9,7 @@ import {
   evolve,
   findIndex,
   lensPath,
+  mergeRight,
   over,
   pipe,
   prepend,
@@ -21,6 +22,7 @@ const initial = {
   transactions: [],
   photo: '',
   name: '',
+  id: null,
 }
 
 const getNewPocket = (from, to) => pockets => {
@@ -41,7 +43,7 @@ const getNewPocket = (from, to) => pockets => {
 const user = (state = initial, action) => {
   switch (action.type) {
   case SET_USER:
-    return { ...state, ...action.user }
+    return mergeRight(state, { ...action.user })
   case ADD_CURRENCY_USER:
     return evolve({
       followedRates: append({ from: action.from, to: action.to })

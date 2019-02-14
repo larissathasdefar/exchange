@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { chain, uniq } from 'ramda'
 import _ from 'prop-types'
 import { connect } from 'react-redux'
 import { loadRates } from 'actions/currencies'
@@ -27,12 +28,9 @@ class ExchangeContainer extends Component {
     const following = extraCurrency
       ? [...user.followedRates, extraCurrency]
       : user.followedRates
-    const getUniqueCurrencies = [...new Set(  // Set: array with unique values
-      Object.keys(following).reduce(
-        (r, k) => r.concat(following[k].from, following[k].to),
-        [],
-      ),
-    )]
+    const getUniqueCurrencies = uniq(
+      chain(item => [item.from, item.to], following)
+    )
     onLoadRates(getUniqueCurrencies)
   }
 

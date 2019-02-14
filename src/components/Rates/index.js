@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from 'react'
 import _ from 'prop-types'
+import { isEmpty, keys } from 'ramda'
 import Typography from '@material-ui/core/Typography'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -67,7 +68,7 @@ class Rates extends PureComponent {
           onChange={this.handleChange}
           name="from">
           <option value="">Select a currency</option>
-          { Object.keys(currencies).map(key => (
+          { keys(currencies).map(key => (
             <option value={key} key={key}>
               {`${key} - ${currencies[key]}`}
             </option>
@@ -83,7 +84,7 @@ class Rates extends PureComponent {
           onChange={this.handleChange}
           name="to">
           <option value="">Select a currency</option>
-          { Object.keys(currencies).map(key => (
+          { keys(currencies).map(key => (
             <option value={key} key={key}>
               {`${key} - ${currencies[key]}`}
             </option>
@@ -120,7 +121,7 @@ class Rates extends PureComponent {
           Keep track of your favorites exchanges.
         </Typography>
         {
-          Object.keys(rates).length === 0
+          isEmpty(rates)
             ? <Loading />
             : (
               <Table>
