@@ -56,8 +56,7 @@ class Exchange extends PureComponent {
   componentDidMount() {
     const { onLoadRates } = this.props
     onLoadRates()
-    // TODO: uncomment the line below
-    // this.interval = setInterval(() => onLoadRates(), 10000)
+    this.interval = setInterval(() => onLoadRates(), 10000)
   }
 
   componentWillUnmount() {
@@ -69,8 +68,16 @@ class Exchange extends PureComponent {
   }
 
   handleConfirm = () => {
-    this.handleToggleConfirmation()
-    // TODO: Call Api
+    const { onConfirmExchange } = this.props
+    const { from, to, convert } = this.state
+    onConfirmExchange(
+      { code: from, amount: parseFloat(convert) },
+      { code: to, amount: parseFloat(this.getFinalAmount()) },
+    )
+    this.setState(({ openConfirmation }) => ({
+      openConfirmation: !openConfirmation,
+      convert: '',
+    }))
   }
 
   handleChange = event => {
@@ -86,16 +93,24 @@ class Exchange extends PureComponent {
       : this.setState({ to: currency.title })
   }
 
+  getFinalAmount = () => {
+    const { convert, from, to } = this.state
+    const { rates } = this.props
+    const parsed = parseFloat(convert) || 0
+    const rate = exchangeMoney(from, to, rates)
+    return (parsed / rate).toFixed(2)
+  }
+
   renderConfirmation = () => {
     const { convert, from, openConfirmation } = this.state
     return (
       <Dialog
         open={openConfirmation}
         onClose={this.handleToggleConfirmation}>
-        <DialogTitle>{`Do you want to confirm the exchange ${formatMoney(convert, from)}?`}</DialogTitle>
+        <DialogTitle>Do you want to confirm the exchange?</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            If you confirm you will not be able to undo this transaction later.
+            If you confirm you will not be able to undo this later.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -148,13 +163,11 @@ class Exchange extends PureComponent {
   renderConversion = () => {
     const { convert, to, from } = this.state
     const { rates } = this.props
-    const parsed = parseFloat(convert) || 0
     const rate = exchangeMoney(from, to, rates)
-    const finalAmount = parsed / rate
     return (
       <Complement>
         <Typography variant="h4" align="right">
-          { `+ ${finalAmount.toFixed(2)}` }
+          { `+ ${this.getFinalAmount()}` }
         </Typography>
         <Typography variant="subtitle1" align="right">
           {`${formatMoney(1, to)} = ${formatMoney(rate, from)}`}
@@ -258,6 +271,29 @@ class Exchange extends PureComponent {
       </Container>
     )
   }
+}
+
+Exchange.propTypes = {
+  user: _.shape({
+    name: _.string,
+    photo: _.string,
+    pockets: _.arrayOf(
+      _.shape({
+        amount: _.number,
+        code: _.string
+      })
+    ),
+    followedRates: _.arrayOf(_.shape({
+      form: _.string,
+      to: _.string,
+    })),
+  }).isRequired,
+  history: _.shape({
+    push: _.func.isRequired,
+  }).isRequired,
+  rates: _.shape({}).isRequired,
+  onLoadRates: _.func.isRequired,
+  onConfirmExchange: _.func.isRequired,
 }
 
 export default Exchange

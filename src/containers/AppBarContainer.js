@@ -26,7 +26,7 @@ class AppBarContainer extends Component {
         {
           from: { code: 'EUR', amount: 15 },
           to: { code: 'GBP', amount: 3.19 },
-          date: new Date('02/12/2019 08:55'),
+          date: new Date('12/22/2018 08:55'),
         },
         {
           from: { code: 'EUR', amount: 23 },

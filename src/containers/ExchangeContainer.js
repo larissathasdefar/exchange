@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import _ from 'prop-types'
 import { connect } from 'react-redux'
 import { loadRates } from 'actions/currencies'
-import { addCurrency } from 'actions/user'
+import { addCurrency, addTransaction } from 'actions/user'
 import Exchange from 'components/Exchange'
 import Rates from 'components/Rates'
 import Loading from 'ui/Loading'
@@ -35,9 +35,14 @@ class ExchangeContainer extends Component {
   }
 
   handleAddCurrency = (from, to) => {
-    const { onAddCurrency, user } = this.props
+    const { onAddCurrency } = this.props
     this.handleLoadRates({ from, to })
     onAddCurrency(from, to)
+  }
+
+  handleConfirmExchange = (from, to) => {
+    const { onAddTransaction } = this.props
+    onAddTransaction(from, to, new Date())
   }
 
   renderError = () => {
@@ -74,6 +79,7 @@ class ExchangeContainer extends Component {
             history={history}
             rates={rates.list}
             onLoadRates={this.handleLoadRates}
+            onConfirmExchange={this.handleConfirmExchange}
           />
           <Rates
             rates={rates.list}
@@ -117,6 +123,7 @@ ExchangeContainer.propTypes = {
   errorRates: _.bool.isRequired,
   onLoadRates: _.func.isRequired,
   onAddCurrency: _.func.isRequired,
+  onAddTransaction: _.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch => ({
@@ -125,6 +132,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onAddCurrency: (from, to) => {
     dispatch(addCurrency(from, to))
+  },
+  onAddTransaction: (from, to, date) => {
+    dispatch(addTransaction(from, to, date))
   }
 })
 

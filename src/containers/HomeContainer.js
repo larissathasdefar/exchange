@@ -28,6 +28,7 @@ class HomeContainer extends Component {
     if (error) {
       return this.renderError()
     }
+
     return user.pockets.length && !loading
       ? (
         <Container>
