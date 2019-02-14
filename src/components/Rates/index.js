@@ -5,9 +5,17 @@ import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
+import DeleteIcon from '@material-ui/icons/Delete'
 import Loading from 'ui/Loading'
 import {
-  Container, MargedButton, SelectField, SelectContainer, Label,
+  Container,
+  MargedButton,
+  SelectField,
+  SelectContainer,
+  Label,
+  RateContainer,
+  Rate,
+  DeleteButton,
 } from './Rates.styles'
 
 const exchangeMoney = (to, from, rates) => rates['EUR'] / rates[to] * rates[from]
@@ -111,23 +119,28 @@ class Rates extends PureComponent {
                 <TableBody>
                   {
                     followedRates.map(({ from, to }) => (
-                      <TableRow key={`${from}-${to}`}>
+                      <RateContainer key={`${from}-${to}`}>
                         <TableCell>
                           <Typography variant="h5">
                             {`1 ${from}`}
                           </Typography>
                         </TableCell>
                         <TableCell align="right">
-                          <Typography variant="h5">
-                            { hasExchange(to)
-                              ? exchangeMoney(from, to, rates).toFixed(2)
-                              : 'Loading...' }
-                          </Typography>
-                          <Typography variant="caption">
-                            { currencies[to] }
-                          </Typography>
+                          <Rate>
+                            <Typography variant="h5">
+                              { hasExchange(to)
+                                ? exchangeMoney(from, to, rates).toFixed(2)
+                                : 'Loading...' }
+                            </Typography>
+                            <Typography variant="caption">
+                              { currencies[to] }
+                            </Typography>
+                          </Rate>
+                          <DeleteButton>
+                            <DeleteIcon fontSize="small" />
+                          </DeleteButton>
                         </TableCell>
-                      </TableRow>
+                      </RateContainer>
                     ))
                   }
                 </TableBody>

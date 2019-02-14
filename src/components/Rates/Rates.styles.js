@@ -3,6 +3,8 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import NativeSelect from '@material-ui/core/NativeSelect'
+import TableRow from '@material-ui/core/TableRow'
+import IconButton from '@material-ui/core/IconButton'
 
 export const Container = styled(Paper)`
   padding: 20px 0px;
@@ -40,5 +42,32 @@ export const SelectContainer = styled.div`
 export const Label = styled(Typography)`
   && {
     ${({ error }) => (error ? 'color: #e53935;' : '')}
+  }
+`
+
+export const RateContainer = styled(TableRow)`
+  &:hover td:nth-child(2) > div {
+    position: relative;
+    margin-right: 50px;
+    margin-left: -50px;
+  }
+  &:hover td:nth-child(2) > button {
+    opacity: 1;
+  }
+`
+
+export const Rate = styled.div`
+  transition: 0.6s;
+  z-index: 10;
+`
+
+export const DeleteButton = styled(IconButton)`
+  && {
+    transition: 0.5s;
+    position: absolute;
+    margin-left: -34px;
+    margin-top: -48px;
+    opacity: 0;
+    z-index: 5;
   }
 `
