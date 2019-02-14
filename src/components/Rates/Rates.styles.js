@@ -14,6 +14,7 @@ export const Container = styled(Paper)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 14px;
 
   &:hover {
     opacity: 1;

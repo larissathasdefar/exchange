@@ -7,7 +7,9 @@ import Loading from 'ui/Loading'
 import styled from 'styled-components'
 import Typography from '@material-ui/core/Typography'
 
-const Container = styled.div``
+const Container = styled.div`
+  padding: 0px 10px;
+`
 
 class HomeContainer extends Component {
   renderError = () => {

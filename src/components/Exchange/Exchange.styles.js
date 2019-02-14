@@ -7,7 +7,7 @@ import SwapIcon from '@material-ui/icons/SwapVert'
 export const Container = styled(Paper)`
   max-width: calc(600px - 40px);
   padding: 20px 14px;
-  width: 100%
+  width: 100%;
   margin-bottom: 20px;
 `
 
@@ -42,7 +42,6 @@ export const LoadingContainer = styled(Complement)`
 export const StepContainer = styled.div`
   width: fit-content;
   margin: 0 auto;
-  min-width: 438px;
 `
 
 export const ButtonsContainer = styled.div`

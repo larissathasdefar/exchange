@@ -13,6 +13,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 0px 10px;
 `
 
 const Updated = styled(Typography)`

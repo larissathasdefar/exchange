@@ -24,7 +24,7 @@ module.exports = env => {
       path: path.resolve(__dirname, 'build'),
     },
     plugins: [
-      new CleanWebpackPlugin(['build']), // Delete files from /build before create the new files
+      new CleanWebpackPlugin(['build']), // Delete files from /build before create the new one
       new HtmlWebPackPlugin({
         template: './public/index.html',
         filename: './index.html',
