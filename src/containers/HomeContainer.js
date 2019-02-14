@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import _ from 'prop-types'
 import { connect } from 'react-redux'
+import AppBar from 'containers/AppBarContainer'
 import Home from 'components/Home'
 import Transactions from 'components/Transactions'
 import Loading from 'ui/Loading'
@@ -31,20 +32,27 @@ class HomeContainer extends Component {
       return this.renderError()
     }
 
-    return user.pockets.length && !loading
-      ? (
-        <Container>
-          <Home
-            user={user}
-            history={history}
-            currencies={currencies}
-          />
-          <Transactions
-            transactions={user.transactions}
-          />
-        </Container>
-      )
-      : <Loading fullHeight />
+    return (
+      <Fragment>
+        <AppBar history={history} />
+        {
+          user.pockets.length && !loading
+            ? (
+              <Container>
+                <Home
+                  user={user}
+                  history={history}
+                  currencies={currencies}
+                />
+                <Transactions
+                  transactions={user.transactions}
+                />
+              </Container>
+            )
+            : <Loading fullHeight />
+        }
+      </Fragment>
+    )
   }
 }
 

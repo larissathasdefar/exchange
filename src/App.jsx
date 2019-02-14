@@ -12,7 +12,6 @@ import {
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import Home from 'containers/HomeContainer'
 import Exchange from 'containers/ExchangeContainer'
-import AppBar from 'containers/AppBarContainer'
 import rootReducer from './reducers'
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
@@ -34,7 +33,6 @@ const theme = createMuiTheme({
 const App = () => (
   <MuiThemeProvider theme={theme}>
     <Provider store={store}>
-      <AppBar />
       <Router>
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/pockets" />} />

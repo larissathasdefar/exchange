@@ -3,6 +3,7 @@ import _ from 'prop-types'
 import { connect } from 'react-redux'
 import { loadRates } from 'actions/currencies'
 import { addCurrency, removeCurrency, addTransaction } from 'actions/user'
+import AppBar from 'containers/AppBarContainer'
 import Exchange from 'components/Exchange'
 import Rates from 'components/Rates'
 import Loading from 'ui/Loading'
@@ -73,31 +74,38 @@ class ExchangeContainer extends Component {
     if (error || errorRates) {
       return this.renderError()
     }
-    return user.pockets.length && !loading
-      ? (
-        <Container>
-          <Exchange
-            user={user}
-            history={history}
-            rates={rates.list}
-            onLoadRates={this.handleLoadRates}
-            onConfirmExchange={this.handleConfirmExchange}
-          />
-          <Rates
-            rates={rates.list}
-            currencies={currencies}
-            followedRates={user.followedRates}
-            onAddCurrency={this.handleAddCurrency}
-            onRemoveCurrency={onRemoveCurrency}
-          />
-          { rates.updatedAt && (
-            <Updated variant="caption" align="center">
-              {`Updated at ${new Date(rates.updatedAt).toLocaleString()}`}
-            </Updated>
-          ) }
-        </Container>
-      )
-      : <Loading fullHeight />
+    return (
+      <Fragment>
+        <AppBar history={history} />
+        {
+          user.pockets.length && !loading
+            ? (
+              <Container>
+                <Exchange
+                  user={user}
+                  history={history}
+                  rates={rates.list}
+                  onLoadRates={this.handleLoadRates}
+                  onConfirmExchange={this.handleConfirmExchange}
+                />
+                <Rates
+                  rates={rates.list}
+                  currencies={currencies}
+                  followedRates={user.followedRates}
+                  onAddCurrency={this.handleAddCurrency}
+                  onRemoveCurrency={onRemoveCurrency}
+                />
+                { rates.updatedAt && (
+                  <Updated variant="caption" align="center">
+                    {`Updated at ${new Date(rates.updatedAt).toLocaleString()}`}
+                  </Updated>
+                ) }
+              </Container>
+            )
+            : <Loading fullHeight />
+        }
+      </Fragment>
+    )
   }
 }
 

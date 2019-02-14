@@ -39,8 +39,13 @@ class AppBarContainer extends Component {
   }
 
   render () {
-    const { user } = this.props
-    return <HeadBar user={user} />
+    const { user, history } = this.props
+    return (
+      <HeadBar
+        user={user}
+        history={history}
+      />
+    )
   }
 }
 
@@ -54,6 +59,9 @@ AppBarContainer.propTypes = {
         amount: _.number,
       }),
     ),
+  }).isRequired,
+  history: _.shape({
+    push: _.func,
   }).isRequired,
   onSetUser: _.func.isRequired,
   onLoadCurrencies: _.func.isRequired,

@@ -17,7 +17,7 @@ class HeadBar extends PureComponent {
   }
 
   render() {
-    const { user } = this.props
+    const { user, history } = this.props
     const image = user.photo !== ''
       ? <Avatar image={user.photo} alt={user.name} />
       : <AccountIcon fontSize="large" />
@@ -26,7 +26,9 @@ class HeadBar extends PureComponent {
         <img src={Logo} />
         <Menu>
           <Typography>Bank</Typography>
-          <CurrentPage>Exchange</CurrentPage>
+          <CurrentPage onClick={() => history.push('/pockets')}>
+            Exchange
+          </CurrentPage>
           {
             user.name !== ''
               ? (
@@ -46,7 +48,10 @@ HeadBar.propTypes = {
   user: _.shape({
     name: _.string,
     photo: _.string,
-  })
+  }),
+  history: _.shape({
+    push: _.func,
+  }).isRequired,
 }
 
 export default HeadBar

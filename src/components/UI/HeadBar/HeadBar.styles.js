@@ -20,6 +20,7 @@ export const Menu = styled.div`
 
 export const CurrentPage = styled(Typography)`
   border-bottom: 2px solid #e64a19;
+  cursor: pointer;
 `
 
 export const Avatar = styled.div`
