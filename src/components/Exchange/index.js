@@ -130,32 +130,56 @@ class Exchange extends PureComponent {
   }
 
   renderConfirmation = () => {
-    const { openConfirmation } = this.state
+    const { openConfirmation, convert } = this.state
+    const content = isEmpty(convert)
+      ? {
+        title: 'Error',
+        description: 'You must fill the field with a number.',
+      }
+      : {
+        title: 'Do you want to confirm the exchange?',
+        description: 'If you confirm you will not be able to undo this later.',
+      }
     return (
       <Dialog
         open={openConfirmation}
         onClose={this.handleToggleConfirmation}>
-        <DialogTitle>Do you want to confirm the exchange?</DialogTitle>
+        <DialogTitle>{content.title}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            If you confirm you will not be able to undo this later.
+            {content.description}
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Cancel
-            variant="outlined"
-            color="secondary"
-            onClick={this.handleToggleConfirmation}>
-            Cancel
-          </Cancel>
-          <Button
-            autoFocus
-            variant="contained"
-            color="primary"
-            onClick={this.handleConfirm}>
-            Confirm
-          </Button>
-        </DialogActions>
+        {
+          isEmpty(convert)
+            ? (
+              <DialogActions>
+                <Cancel
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleToggleConfirmation}>
+                  Close
+                </Cancel>
+              </DialogActions>
+            )
+            : (
+              <DialogActions>
+                <Cancel
+                  variant="outlined"
+                  color="secondary"
+                  onClick={this.handleToggleConfirmation}>
+                  Cancel
+                </Cancel>
+                <Button
+                  autoFocus
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleConfirm}>
+                  Confirm
+                </Button>
+              </DialogActions>
+            )
+        }
       </Dialog>
     )
   }
