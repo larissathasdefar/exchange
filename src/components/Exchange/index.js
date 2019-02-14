@@ -28,7 +28,7 @@ import Loading from 'ui/Loading'
 const formatMoney = (amount, currency) => amount
   .toLocaleString(undefined, { style: 'currency', currency: currency })
 
-const exchangeMoney = (to, from, rates) => rates['EUR'] / rates[from] * rates[to]
+const getRate = (to, from, rates) => rates['EUR'] / rates[from] * rates[to]
 
 const START_STEP_FROM = 0
 const START_STEP_TO = 1
@@ -66,16 +66,30 @@ class Exchange extends PureComponent {
     clearInterval(this.interval)
   }
 
+  exchangeMoney = (inversed = false) => {
+    const { convert, from, to, editingFrom } = this.state
+    const { rates } = this.props
+    const parsed = parseFloat(convert.replace(',', '.')) || 0
+    const rate = getRate(from, to, rates)
+    const amount = inversed
+      ? parsed * rate
+      : editingFrom
+        ? parsed / rate
+        : rate / parsed
+    return amount.toFixed(2)
+  }
+
   handleToggleConfirmation = () => {
     this.setState(({ openConfirmation }) => ({ openConfirmation: !openConfirmation }))
   }
 
   handleConfirm = () => {
     const { onConfirmExchange } = this.props
-    const { from, to, convert } = this.state
+    const { from, to, convert, editingFrom } = this.state
+
     onConfirmExchange(
-      { code: from, amount: parseFloat(convert.replace(',', '.')) },
-      { code: to, amount: parseFloat(this.getFinalAmount()) },
+      { code: editingFrom ? from : to, amount: parseFloat(convert.replace(',', '.')) },
+      { code: editingFrom ? to : from, amount: parseFloat(this.exchangeMoney()) },
     )
     this.setState(({ openConfirmation }) => ({
       openConfirmation: !openConfirmation,
@@ -96,14 +110,9 @@ class Exchange extends PureComponent {
   }
 
   handleChangeFieldEdit = editingFrom => {
-    const { rates } = this.props
-    const { from, to, convert } = this.state
-    const converted = editingFrom
-      ? exchangeMoney(from, to, rates)
-      : exchangeMoney(to, from, rates)
     this.setState({
       editingFrom,
-      convert: `${(converted*convert).toFixed(2)}`,
+      convert: `${this.exchangeMoney()}`,
     })
   }
 
@@ -111,16 +120,6 @@ class Exchange extends PureComponent {
     return currency.from
       ? this.setState({ from: currency.title, max: currency.max })
       : this.setState({ to: currency.title })
-  }
-
-  getFinalAmount = () => {
-    const { convert, from, to, editingFrom } = this.state
-    const { rates } = this.props
-    const parsed = parseFloat(convert.replace(',', '.')) || 0
-    const rate = editingFrom
-      ? exchangeMoney(from, to, rates)
-      : exchangeMoney(to, from, rates)
-    return (parsed / rate).toFixed(2)
   }
 
   renderConfirmation = () => {
@@ -157,14 +156,12 @@ class Exchange extends PureComponent {
   renderField = () => {
     const { convert, to, from, error, editingFrom } = this.state
     const { rates } = this.props
-    const rate = editingFrom
-      ? exchangeMoney(to, from, rates)
-      : exchangeMoney(from, to, rates)
+    const origin = editingFrom ? to : from
+    const destiny = editingFrom ? from : to
+    const rate = getRate(origin, destiny, rates)
     const helperText = error
       ? 'You can\'t exchange what you don\'t have'
-      : editingFrom
-        ? `${formatMoney(1, from)} = ${formatMoney(rate, to)}`
-        : `${formatMoney(1, to)} = ${formatMoney(rate, to)}`
+      : `${formatMoney(1, destiny)} = ${formatMoney(rate, origin)}`
     const symbol = editingFrom ? '-' : '+'
     return (
       <Complement>
@@ -193,19 +190,17 @@ class Exchange extends PureComponent {
   renderConversion = () => {
     const { to, from, editingFrom } = this.state
     const { rates } = this.props
-    const rate = editingFrom
-      ? exchangeMoney(from, to, rates)
-      : exchangeMoney(to, from, rates)
+    const origin = editingFrom ? from : to
+    const destiny = editingFrom ? to : from
+    const rate = getRate(origin, destiny, rates)
     const symbol = editingFrom ? '+' : '-'
     return (
       <Complement onClick={() => this.handleChangeFieldEdit(!editingFrom)}>
         <Typography variant="h4" align="right">
-          { `${symbol} ${this.getFinalAmount()}` }
+          { `${symbol} ${this.exchangeMoney(!editingFrom)}` }
         </Typography>
         <Typography variant="subtitle1" align="right">
-          { editingFrom
-            ? `${formatMoney(1, to)} = ${formatMoney(rate, from)}`
-            : `${formatMoney(1, from)} = ${formatMoney(rate, to)}`}
+          {`${formatMoney(1, destiny)} = ${formatMoney(rate, origin)}`}
         </Typography>
       </Complement>
     )
