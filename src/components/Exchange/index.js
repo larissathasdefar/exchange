@@ -49,7 +49,8 @@ const getInitialState = ({ user }) => ({
   from: user.pockets[START_STEP_FROM].code,
   max: user.pockets[START_STEP_FROM].amount,
   to: user.pockets[reduceExtraSteps(START_STEP_TO, user.pockets)].code,
-  error: false
+  error: false,
+  editingFrom: true,
 })
 
 class Exchange extends PureComponent {
@@ -94,6 +95,18 @@ class Exchange extends PureComponent {
     }
   }
 
+  handleChangeFieldEdit = editingFrom => {
+    const { rates } = this.props
+    const { from, to, convert } = this.state
+    const converted = editingFrom
+      ? exchangeMoney(from, to, rates)
+      : exchangeMoney(to, from, rates)
+    this.setState({
+      editingFrom,
+      convert: `${(converted*convert).toFixed(2)}`,
+    })
+  }
+
   handleChangeStep = (index, currency) => {
     return currency.from
       ? this.setState({ from: currency.title, max: currency.max })
@@ -101,10 +114,12 @@ class Exchange extends PureComponent {
   }
 
   getFinalAmount = () => {
-    const { convert, from, to } = this.state
+    const { convert, from, to, editingFrom } = this.state
     const { rates } = this.props
     const parsed = parseFloat(convert.replace(',', '.')) || 0
-    const rate = exchangeMoney(from, to, rates)
+    const rate = editingFrom
+      ? exchangeMoney(from, to, rates)
+      : exchangeMoney(to, from, rates)
     return (parsed / rate).toFixed(2)
   }
 
@@ -140,12 +155,17 @@ class Exchange extends PureComponent {
   }
 
   renderField = () => {
-    const { convert, to, from, error } = this.state
+    const { convert, to, from, error, editingFrom } = this.state
     const { rates } = this.props
-    const rate = exchangeMoney(to, from, rates)
+    const rate = editingFrom
+      ? exchangeMoney(to, from, rates)
+      : exchangeMoney(from, to, rates)
     const helperText = error
       ? 'You can\'t exchange what you don\'t have'
-      : `${formatMoney(1, from)} = ${formatMoney(rate, to)}`
+      : editingFrom
+        ? `${formatMoney(1, from)} = ${formatMoney(rate, to)}`
+        : `${formatMoney(1, to)} = ${formatMoney(rate, to)}`
+    const symbol = editingFrom ? '-' : '+'
     return (
       <Complement>
         <TextInput
@@ -156,7 +176,7 @@ class Exchange extends PureComponent {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                { convert === '' ? '' : '-' }
+                { convert === '' ? '' : symbol }
               </InputAdornment>
             ),
           }}
@@ -171,16 +191,21 @@ class Exchange extends PureComponent {
   }
 
   renderConversion = () => {
-    const { to, from } = this.state
+    const { to, from, editingFrom } = this.state
     const { rates } = this.props
-    const rate = exchangeMoney(from, to, rates)
+    const rate = editingFrom
+      ? exchangeMoney(from, to, rates)
+      : exchangeMoney(to, from, rates)
+    const symbol = editingFrom ? '+' : '-'
     return (
-      <Complement>
+      <Complement onClick={() => this.handleChangeFieldEdit(!editingFrom)}>
         <Typography variant="h4" align="right">
-          { `+ ${this.getFinalAmount()}` }
+          { `${symbol} ${this.getFinalAmount()}` }
         </Typography>
         <Typography variant="subtitle1" align="right">
-          {`${formatMoney(1, to)} = ${formatMoney(rate, from)}`}
+          { editingFrom
+            ? `${formatMoney(1, to)} = ${formatMoney(rate, from)}`
+            : `${formatMoney(1, from)} = ${formatMoney(rate, to)}`}
         </Typography>
       </Complement>
     )
@@ -188,6 +213,9 @@ class Exchange extends PureComponent {
 
   renderCurrency = ({ title, subtitle, from }) => {
     const { rates } = this.props
+    const { editingFrom } = this.state
+    const shouldRenderField = (from && editingFrom)
+      || (!from && !editingFrom)
     return (
       <CurrencyContainer>
         <Currency>
@@ -200,7 +228,9 @@ class Exchange extends PureComponent {
         </Currency>
         {
           Object.keys(rates).length
-            ? from ? this.renderField() : this.renderConversion()
+            ? shouldRenderField
+              ? this.renderField()
+              : this.renderConversion()
             : (
               <LoadingContainer>
                 <Loading />
