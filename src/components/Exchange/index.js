@@ -86,10 +86,13 @@ class Exchange extends PureComponent {
   handleConfirm = () => {
     const { onConfirmExchange } = this.props
     const { from, to, convert, editingFrom } = this.state
-
+    const amounts = [
+      parseFloat(convert.replace(',', '.')),
+      parseFloat(this.exchangeMoney())
+    ]
     onConfirmExchange(
-      { code: editingFrom ? from : to, amount: parseFloat(convert.replace(',', '.')) },
-      { code: editingFrom ? to : from, amount: parseFloat(this.exchangeMoney()) },
+      { code: from, amount: amounts[editingFrom ? 0 : 1] },
+      { code: to, amount: amounts[editingFrom ? 1 : 0] },
     )
     this.setState(({ openConfirmation }) => ({
       openConfirmation: !openConfirmation,
