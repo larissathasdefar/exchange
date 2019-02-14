@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton'
 export const Container = styled(Paper)`
   padding: 20px 0px;
   opacity: 0.7;
-  min-width: 275px;
+  min-width: 318px;
   max-height: 442px;
   overflow: auto;
   transition: 0.5s;

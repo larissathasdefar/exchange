@@ -49,6 +49,11 @@ class Rates extends PureComponent {
     }
   }
 
+  handleRemoveCurrency = (from, to) => {
+    const { onRemoveCurrency } = this.props
+    onRemoveCurrency(from, to)
+  }
+
   renderAddCurrency = () => {
     const { from, to, error } = this.state
     const { currencies } = this.props
@@ -108,8 +113,11 @@ class Rates extends PureComponent {
     const hasExchange = currency => rates[currency]
     return (
       <Container elevation={1}>
-        <Typography variant="h4" align="center" paragraph>
+        <Typography variant="h4" align="center">
           Rates
+        </Typography>
+        <Typography variant="caption" align="center" paragraph>
+          Keep track of your favorites exchanges.
         </Typography>
         {
           Object.keys(rates).length === 0
@@ -136,7 +144,7 @@ class Rates extends PureComponent {
                               { currencies[to] }
                             </Typography>
                           </Rate>
-                          <DeleteButton>
+                          <DeleteButton onClick={() => this.handleRemoveCurrency(from, to)}>
                             <DeleteIcon fontSize="small" />
                           </DeleteButton>
                         </TableCell>
@@ -172,6 +180,7 @@ Rates.propTypes = {
   rates: _.shape({}).isRequired,
   currencies: _.shape({}).isRequired,
   onAddCurrency: _.func.isRequired,
+  onRemoveCurrency: _.func.isRequired,
 }
 
 export default Rates

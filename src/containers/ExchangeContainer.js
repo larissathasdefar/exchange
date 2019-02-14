@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import _ from 'prop-types'
 import { connect } from 'react-redux'
 import { loadRates } from 'actions/currencies'
-import { addCurrency, addTransaction } from 'actions/user'
+import { addCurrency, removeCurrency, addTransaction } from 'actions/user'
 import Exchange from 'components/Exchange'
 import Rates from 'components/Rates'
 import Loading from 'ui/Loading'
@@ -68,6 +68,7 @@ class ExchangeContainer extends Component {
       currencies,
       rates,
       errorRates,
+      onRemoveCurrency,
     } = this.props
     if (error || errorRates) {
       return this.renderError()
@@ -87,6 +88,7 @@ class ExchangeContainer extends Component {
             currencies={currencies}
             followedRates={user.followedRates}
             onAddCurrency={this.handleAddCurrency}
+            onRemoveCurrency={onRemoveCurrency}
           />
           { rates.updatedAt && (
             <Updated variant="caption" align="center">
@@ -124,6 +126,7 @@ ExchangeContainer.propTypes = {
   errorRates: _.bool.isRequired,
   onLoadRates: _.func.isRequired,
   onAddCurrency: _.func.isRequired,
+  onRemoveCurrency: _.func.isRequired,
   onAddTransaction: _.func.isRequired,
 }
 
@@ -134,9 +137,12 @@ const mapDispatchToProps = dispatch => ({
   onAddCurrency: (from, to) => {
     dispatch(addCurrency(from, to))
   },
+  onRemoveCurrency: (from, to) => {
+    dispatch(removeCurrency(from, to))
+  },
   onAddTransaction: (from, to, date) => {
     dispatch(addTransaction(from, to, date))
-  }
+  },
 })
 
 const mapStateToProps = state => ({

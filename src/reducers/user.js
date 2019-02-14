@@ -1,6 +1,7 @@
 import {
   SET_USER,
   ADD_CURRENCY_USER,
+  REMOVE_CURRENCY_USER,
   ADD_TRANSACTION,
 } from 'constants'
 
@@ -31,6 +32,12 @@ const user = (state = initial, action) => {
         ...state.followedRates,
         { from: action.from, to: action.to },
       ]
+    }
+  case REMOVE_CURRENCY_USER:
+    return {
+      ...state,
+      followedRates: [...state.followedRates].filter(({ from, to }) => (
+        !(from === action.remove.from && to === action.remove.to)))
     }
   case ADD_TRANSACTION:
     const { from, to } = action.transaction

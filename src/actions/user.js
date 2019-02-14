@@ -1,6 +1,7 @@
 import {
   SET_USER,
   ADD_CURRENCY_USER,
+  REMOVE_CURRENCY_USER,
   ADD_TRANSACTION,
 } from 'constants'
 
@@ -17,5 +18,10 @@ export const addCurrency = (from, to) => ({
 
 export const addTransaction = (from, to, date) => ({
   type: ADD_TRANSACTION,
-  transaction: { from, to, date }
+  transaction: { from, to, date },
+})
+
+export const removeCurrency = (from, to) => ({
+  type: REMOVE_CURRENCY_USER,
+  remove: { from, to },
 })
