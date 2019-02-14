@@ -24,6 +24,7 @@ export const Currency = styled.div`
 export const TextInput = styled(TextField)`
   width: 120px;
   float: right;
+  max-height: 68px;
 `
 
 export const Complement = styled.div`

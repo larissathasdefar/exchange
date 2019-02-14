@@ -47,7 +47,9 @@ const getInitialState = ({ user }) => ({
   convert: '',
   openConfirmation: false,
   from: user.pockets[START_STEP_FROM].code,
+  max: user.pockets[START_STEP_FROM].amount,
   to: user.pockets[reduceExtraSteps(START_STEP_TO, user.pockets)].code,
+  error: false
 })
 
 class Exchange extends PureComponent {
@@ -81,17 +83,20 @@ class Exchange extends PureComponent {
   }
 
   handleChange = event => {
+    const { max } = this.state
     const { value } = event.target
+    const getValue = value === '' ? '0' : value
     const isValidNumber = new RegExp(/^[0-9]+([\.,][0-9]{0,2})?$/gm)
-      .test(value)
-    if (isValidNumber || value === '') {
-      this.setState({ convert: value })
+      .test(getValue)
+    const hasAmount = parseFloat(getValue.replace(',', '.')) <= max
+    if (isValidNumber) {
+      this.setState({ convert: value, error: !hasAmount })
     }
   }
 
   handleChangeStep = (index, currency) => {
     return currency.from
-      ? this.setState({ from: currency.title })
+      ? this.setState({ from: currency.title, max: currency.max })
       : this.setState({ to: currency.title })
   }
 
@@ -104,7 +109,7 @@ class Exchange extends PureComponent {
   }
 
   renderConfirmation = () => {
-    const { convert, from, openConfirmation } = this.state
+    const { openConfirmation } = this.state
     return (
       <Dialog
         open={openConfirmation}
@@ -134,17 +139,20 @@ class Exchange extends PureComponent {
     )
   }
 
-  renderField = max => {
-    const { convert, to, from } = this.state
+  renderField = () => {
+    const { convert, to, from, error } = this.state
     const { rates } = this.props
     const rate = exchangeMoney(to, from, rates)
+    const helperText = error
+      ? 'You can\'t exchange what you don\'t have'
+      : `${formatMoney(1, from)} = ${formatMoney(rate, to)}`
     return (
       <Complement>
         <TextInput
           autoFocus
+          error={error}
           label="Convert"
           value={convert}
-          max={max}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -155,7 +163,7 @@ class Exchange extends PureComponent {
           InputLabelProps={{
             shrink: true,
           }}
-          helperText={`${formatMoney(1, from)} = ${formatMoney(rate, to)}`}
+          helperText={helperText}
           onChange={this.handleChange}
         />
       </Complement>
@@ -163,7 +171,7 @@ class Exchange extends PureComponent {
   }
 
   renderConversion = () => {
-    const { convert, to, from } = this.state
+    const { to, from } = this.state
     const { rates } = this.props
     const rate = exchangeMoney(from, to, rates)
     return (
@@ -178,7 +186,7 @@ class Exchange extends PureComponent {
     )
   }
 
-  renderCurrency = ({ title, subtitle, from, max }) => {
+  renderCurrency = ({ title, subtitle, from }) => {
     const { rates } = this.props
     return (
       <CurrencyContainer>
@@ -192,7 +200,7 @@ class Exchange extends PureComponent {
         </Currency>
         {
           Object.keys(rates).length
-            ? from ? this.renderField(max) : this.renderConversion()
+            ? from ? this.renderField() : this.renderConversion()
             : (
               <LoadingContainer>
                 <Loading />
@@ -204,12 +212,12 @@ class Exchange extends PureComponent {
   }
 
   renderExchangeButton = () => {
-    const { from, to } = this.state
+    const { from, to, error } = this.state
     return (
       <Button
         variant="contained"
         color="primary"
-        disabled={from === to}
+        disabled={from === to || error}
         onClick={this.handleToggleConfirmation}>
         Exchange
         <MoneyIcon />
@@ -219,13 +227,16 @@ class Exchange extends PureComponent {
 
   render() {
     const { user, history } = this.props
-    const { from, to } = this.state
+    const { from, to, error } = this.state
     const getSteps = type => user.pockets.map(({ amount, code }) => ({
       title: code,
       subtitle: `You have ${formatMoney(amount, code)}`,
       max: amount,
       [type]: true,
     }))
+    const errorMessage = from === to
+      ? 'You can\'t exchange between the same currency'
+      : 'You can\'t exchange what you don\'t have'
     return (
       <Container elevation={1}>
         <Typography variant="h4" align="center">
@@ -258,9 +269,9 @@ class Exchange extends PureComponent {
             onClick={() => history.push('/pockets')}>
             Cancel
           </Cancel>
-          { from === to
+          { from === to || error
             ? (
-              <Tooltip title="You can't exchange between the same currency">
+              <Tooltip title={errorMessage}>
                 <div>
                   { this.renderExchangeButton() }
                 </div>
