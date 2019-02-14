@@ -14,7 +14,7 @@ class AppBarContainer extends Component {
         { code: 'GBP', amount: 50.56 },
         { code: 'EUR', amount: 90.06 },
       ],
-      photo: '',
+      photo: 'https://scontent.fjoi1-2.fna.fbcdn.net/v/t1.0-1/c21.0.699.699a/s100x100/13240613_1031098473634742_623670164829509408_n.jpg?_nc_cat=106&_nc_ht=scontent.fjoi1-2.fna&oh=73ef6448c5749f90458e20e6bd8afe64&oe=5CEC15C9',
       name: 'Larissa Farias',
       followedRates: [
         { from: 'USD', to: 'GBP' },

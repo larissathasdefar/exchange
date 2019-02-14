@@ -10,7 +10,7 @@ export const Container = styled(Paper)`
 
 export const Content = styled.div`
   padding: 20px 14px;
-  background: #0288d1;
+  background: linear-gradient(190deg, #9d4583 0%, #3377e4 100%);
 `
 
 export const Actions = styled.div`

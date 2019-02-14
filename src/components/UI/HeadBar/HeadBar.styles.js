@@ -21,3 +21,11 @@ export const Menu = styled.div`
 export const CurrentPage = styled(Typography)`
   border-bottom: 2px solid #e64a19;
 `
+
+export const Avatar = styled.div`
+  height: 38px;
+  width: 38px;
+  background-image: url(${({ image }) => image});
+  background-size: cover;
+  border-radius: 50%;
+`

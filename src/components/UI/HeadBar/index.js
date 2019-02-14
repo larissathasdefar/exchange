@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import _ from 'prop-types'
 import Logo from 'assets/revolut.png'
 import AccountIcon from '@material-ui/icons/AccountCircle'
@@ -8,6 +8,7 @@ import {
   Container,
   Menu,
   CurrentPage,
+  Avatar,
 } from './HeadBar.styles'
 
 class HeadBar extends PureComponent {
@@ -17,6 +18,9 @@ class HeadBar extends PureComponent {
 
   render() {
     const { user } = this.props
+    const image = user.photo !== ''
+      ? <Avatar image={user.photo} alt={user.name} />
+      : <AccountIcon fontSize="large" />
     return (
       <Container>
         <img src={Logo} />
@@ -27,10 +31,10 @@ class HeadBar extends PureComponent {
             user.name !== ''
               ? (
                 <Tooltip title={user.name}>
-                  <AccountIcon fontSize="large" />
+                  {image}
                 </Tooltip>
               )
-              : <AccountIcon fontSize="large" />
+              : image
           }
         </Menu>
       </Container>
