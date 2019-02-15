@@ -3,7 +3,7 @@
 exports[`Stepper Basic example 1`] = `
 "<styled.div>
   <styled.div>
-    <Styled(WithStyles(Button)) onClick={[Function]}>
+    <Styled(WithStyles(Button)) className=\\"prev-slide\\" onClick={[Function]}>
       <pure(KeyboardArrowLeftIcon) style={[undefined]} />
     </Styled(WithStyles(Button))>
     <styled.div>
@@ -14,7 +14,7 @@ exports[`Stepper Basic example 1`] = `
         Slide
       </WithStyles(Typography)>
     </styled.div>
-    <Styled(WithStyles(Button)) onClick={[Function]}>
+    <Styled(WithStyles(Button)) className=\\"next-slide\\" onClick={[Function]}>
       <pure(KeyboardArrowRightIcon) style={[undefined]} />
     </Styled(WithStyles(Button))>
   </styled.div>
@@ -22,10 +22,10 @@ exports[`Stepper Basic example 1`] = `
 </styled.div>"
 `;
 
-exports[`Stepper Starting at Second item 1`] = `
+exports[`Stepper Click next and prev buttons 1`] = `
 "<styled.div>
   <styled.div>
-    <Styled(WithStyles(Button)) onClick={[Function]}>
+    <Styled(WithStyles(Button)) className=\\"prev-slide\\" onClick={[Function]}>
       <pure(KeyboardArrowLeftIcon) style={[undefined]} />
     </Styled(WithStyles(Button))>
     <styled.div>
@@ -36,7 +36,73 @@ exports[`Stepper Starting at Second item 1`] = `
         Slide
       </WithStyles(Typography)>
     </styled.div>
-    <Styled(WithStyles(Button)) onClick={[Function]}>
+    <Styled(WithStyles(Button)) className=\\"next-slide\\" onClick={[Function]}>
+      <pure(KeyboardArrowRightIcon) style={[undefined]} />
+    </Styled(WithStyles(Button))>
+  </styled.div>
+  <Styled(WithStyles(MobileStepper)) steps={3} position=\\"static\\" activeStep={1} />
+</styled.div>"
+`;
+
+exports[`Stepper Click next and prev buttons 2`] = `
+"<styled.div>
+  <styled.div>
+    <Styled(WithStyles(Button)) className=\\"prev-slide\\" onClick={[Function]}>
+      <pure(KeyboardArrowLeftIcon) style={[undefined]} />
+    </Styled(WithStyles(Button))>
+    <styled.div>
+      <WithStyles(Typography) align=\\"inherit\\" variant=\\"h4\\" style={[undefined]}>
+        Third
+      </WithStyles(Typography)>
+      <WithStyles(Typography) align=\\"inherit\\" variant=\\"caption\\" style={[undefined]}>
+        Slide
+      </WithStyles(Typography)>
+    </styled.div>
+    <Styled(WithStyles(Button)) className=\\"next-slide\\" onClick={[Function]}>
+      <pure(KeyboardArrowRightIcon) style={[undefined]} />
+    </Styled(WithStyles(Button))>
+  </styled.div>
+  <Styled(WithStyles(MobileStepper)) steps={3} position=\\"static\\" activeStep={2} />
+</styled.div>"
+`;
+
+exports[`Stepper Click next and prev buttons 3`] = `
+"<styled.div>
+  <styled.div>
+    <Styled(WithStyles(Button)) className=\\"prev-slide\\" onClick={[Function]}>
+      <pure(KeyboardArrowLeftIcon) style={[undefined]} />
+    </Styled(WithStyles(Button))>
+    <styled.div>
+      <WithStyles(Typography) align=\\"inherit\\" variant=\\"h4\\" style={[undefined]}>
+        Second
+      </WithStyles(Typography)>
+      <WithStyles(Typography) align=\\"inherit\\" variant=\\"caption\\" style={[undefined]}>
+        Slide
+      </WithStyles(Typography)>
+    </styled.div>
+    <Styled(WithStyles(Button)) className=\\"next-slide\\" onClick={[Function]}>
+      <pure(KeyboardArrowRightIcon) style={[undefined]} />
+    </Styled(WithStyles(Button))>
+  </styled.div>
+  <Styled(WithStyles(MobileStepper)) steps={3} position=\\"static\\" activeStep={1} />
+</styled.div>"
+`;
+
+exports[`Stepper Starting at Second item 1`] = `
+"<styled.div>
+  <styled.div>
+    <Styled(WithStyles(Button)) className=\\"prev-slide\\" onClick={[Function]}>
+      <pure(KeyboardArrowLeftIcon) style={[undefined]} />
+    </Styled(WithStyles(Button))>
+    <styled.div>
+      <WithStyles(Typography) align=\\"inherit\\" variant=\\"h4\\" style={[undefined]}>
+        Second
+      </WithStyles(Typography)>
+      <WithStyles(Typography) align=\\"inherit\\" variant=\\"caption\\" style={[undefined]}>
+        Slide
+      </WithStyles(Typography)>
+    </styled.div>
+    <Styled(WithStyles(Button)) className=\\"next-slide\\" onClick={[Function]}>
       <pure(KeyboardArrowRightIcon) style={[undefined]} />
     </Styled(WithStyles(Button))>
   </styled.div>

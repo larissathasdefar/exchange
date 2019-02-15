@@ -74,7 +74,7 @@ class CustomStepper extends PureComponent {
     return (
       <Container>
         <StepContainer>
-          <SmallButton onClick={this.handleBack}>
+          <SmallButton className="prev-slide" onClick={this.handleBack}>
             <KeyboardArrowLeft style={iconStyle} />
           </SmallButton>
           {
@@ -82,7 +82,7 @@ class CustomStepper extends PureComponent {
               ? renderStep(steps[activeStep])
               : this.renderActualStep()
           }
-          <SmallButton onClick={this.handleNext}>
+          <SmallButton className="next-slide" onClick={this.handleNext}>
             <KeyboardArrowRight style={iconStyle} />
           </SmallButton>
         </StepContainer>
