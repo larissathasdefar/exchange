@@ -46,7 +46,12 @@ class Rates extends PureComponent {
       return this.setState({ error: true })
     } else {
       onAddCurrency(from, to)
-      return this.setState({ error: false, openAddCurrency: false })
+      return this.setState({
+        error: false,
+        openAddCurrency: false,
+        from: '',
+        to: '',
+      })
     }
   }
 

@@ -35,3 +35,7 @@ export const Logo = styled.img`
   cursor: pointer;
   -webkit-user-drag: none;
 `
+
+export const Link = styled(Typography)`
+  cursor: pointer;
+`

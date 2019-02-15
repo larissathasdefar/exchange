@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import _ from 'prop-types'
 import LogoImage from 'assets/revolut.png'
 import AccountIcon from '@material-ui/icons/AccountCircle'
-import Typography from '@material-ui/core/Typography'
 import Tooltip from '@material-ui/core/Tooltip'
 import {
   Container,
@@ -10,6 +9,7 @@ import {
   CurrentPage,
   Avatar,
   Logo,
+  Link,
 } from './HeadBar.styles'
 
 class HeadBar extends PureComponent {
@@ -27,7 +27,7 @@ class HeadBar extends PureComponent {
       <Container>
         <Logo src={LogoImage} onClick={redirect} />
         <Menu>
-          <Typography>Bank</Typography>
+          <Link onClick={redirect}>Bank</Link>
           <CurrentPage onClick={redirect}>
             Exchange
           </CurrentPage>
