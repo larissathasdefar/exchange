@@ -2,12 +2,12 @@
 
 exports[`HeadBar Empty user 1`] = `
 "<styled.div>
-  <img src={{...}} />
+  <styled.img src={{...}} onClick={[Function: redirect]} />
   <styled.div>
     <WithStyles(Typography)>
       Bank
     </WithStyles(Typography)>
-    <Styled(WithStyles(Typography)) onClick={[Function: onClick]}>
+    <Styled(WithStyles(Typography)) onClick={[Function: redirect]}>
       Exchange
     </Styled(WithStyles(Typography))>
     <pure(AccountCircleIcon) fontSize=\\"large\\" />
@@ -17,12 +17,12 @@ exports[`HeadBar Empty user 1`] = `
 
 exports[`HeadBar User with photo 1`] = `
 "<styled.div>
-  <img src={{...}} />
+  <styled.img src={{...}} onClick={[Function: redirect]} />
   <styled.div>
     <WithStyles(Typography)>
       Bank
     </WithStyles(Typography)>
-    <Styled(WithStyles(Typography)) onClick={[Function: onClick]}>
+    <Styled(WithStyles(Typography)) onClick={[Function: redirect]}>
       Exchange
     </Styled(WithStyles(Typography))>
     <WithStyles(Tooltip) title=\\"Larissa Farias\\">
@@ -34,12 +34,12 @@ exports[`HeadBar User with photo 1`] = `
 
 exports[`HeadBar User without photo 1`] = `
 "<styled.div>
-  <img src={{...}} />
+  <styled.img src={{...}} onClick={[Function: redirect]} />
   <styled.div>
     <WithStyles(Typography)>
       Bank
     </WithStyles(Typography)>
-    <Styled(WithStyles(Typography)) onClick={[Function: onClick]}>
+    <Styled(WithStyles(Typography)) onClick={[Function: redirect]}>
       Exchange
     </Styled(WithStyles(Typography))>
     <WithStyles(Tooltip) title=\\"Larissa Farias\\">

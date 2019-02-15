@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound Snapshot 1`] = `
+"<styled.div>
+  <Styled(WithStyles(Typography)) variant=\\"h3\\" onClick={[Function: redirect]}>
+    Not Found
+  </Styled(WithStyles(Typography))>
+  <Styled(WithStyles(Typography)) onClick={[Function: redirect]}>
+    Click here and go back to home
+  </Styled(WithStyles(Typography))>
+</styled.div>"
+`;

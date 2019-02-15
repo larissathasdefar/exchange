@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import _ from 'prop-types'
-import Logo from 'assets/revolut.png'
+import LogoImage from 'assets/revolut.png'
 import AccountIcon from '@material-ui/icons/AccountCircle'
 import Typography from '@material-ui/core/Typography'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -9,6 +9,7 @@ import {
   Menu,
   CurrentPage,
   Avatar,
+  Logo,
 } from './HeadBar.styles'
 
 class HeadBar extends PureComponent {
@@ -18,15 +19,16 @@ class HeadBar extends PureComponent {
 
   render() {
     const { user, history } = this.props
+    const redirect = () => history.push('/pockets')
     const image = user.photo !== ''
       ? <Avatar image={user.photo} alt={user.name} />
       : <AccountIcon fontSize="large" />
     return (
       <Container>
-        <img src={Logo} />
+        <Logo src={LogoImage} onClick={redirect} />
         <Menu>
           <Typography>Bank</Typography>
-          <CurrentPage onClick={() => history.push('/pockets')}>
+          <CurrentPage onClick={redirect}>
             Exchange
           </CurrentPage>
           {

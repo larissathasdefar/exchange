@@ -30,3 +30,8 @@ export const Avatar = styled.div`
   background-size: cover;
   border-radius: 50%;
 `
+
+export const Logo = styled.img`
+  cursor: pointer;
+  -webkit-user-drag: none;
+`
