@@ -99,6 +99,7 @@ class Rates extends PureComponent {
           Cancel
         </MargedButton>
         <MargedButton
+          id="confirm-add-currency"
           variant="contained"
           color="primary"
           onClick={this.handleAddCurrency}>
@@ -161,6 +162,7 @@ class Rates extends PureComponent {
             ? this.renderAddCurrency()
             : (
               <MargedButton
+                id="add-currency"
                 variant="outlined"
                 color="primary"
                 onClick={this.handleToggleOpen}>

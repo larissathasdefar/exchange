@@ -32,8 +32,332 @@ exports[`Rates Following USD to GBP 1`] = `
       </Styled(WithStyles(TableRow))>
     </WithStyles(TableBody)>
   </WithStyles(Table)>
-  <Styled(WithStyles(Button)) variant=\\"outlined\\" color=\\"primary\\" onClick={[Function]}>
+  <Styled(WithStyles(Button)) id=\\"add-currency\\" variant=\\"outlined\\" color=\\"primary\\" onClick={[Function]}>
     Add new currency
   </Styled(WithStyles(Button))>
+</Styled(WithStyles(Paper))>"
+`;
+
+exports[`Rates Following USD to GBP 2`] = `
+"<Styled(WithStyles(Paper)) elevation={1}>
+  <WithStyles(Typography) variant=\\"h4\\" align=\\"center\\">
+    Rates
+  </WithStyles(Typography)>
+  <WithStyles(Typography) variant=\\"caption\\" align=\\"center\\" paragraph={true}>
+    Keep track of your favorites exchanges.
+  </WithStyles(Typography)>
+  <WithStyles(Table)>
+    <WithStyles(TableBody)>
+      <Styled(WithStyles(TableRow))>
+        <WithStyles(TableCell)>
+          <WithStyles(Typography) variant=\\"h5\\">
+            1 USD
+          </WithStyles(Typography)>
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell) align=\\"right\\">
+          <styled.div>
+            <WithStyles(Typography) variant=\\"h5\\">
+              0.78
+            </WithStyles(Typography)>
+            <WithStyles(Typography) variant=\\"caption\\">
+              British Pound Sterling
+            </WithStyles(Typography)>
+          </styled.div>
+          <Styled(WithStyles(IconButton)) onClick={[Function: onClick]}>
+            <pure(DeleteIcon) fontSize=\\"small\\" />
+          </Styled(WithStyles(IconButton))>
+        </WithStyles(TableCell)>
+      </Styled(WithStyles(TableRow))>
+    </WithStyles(TableBody)>
+  </WithStyles(Table)>
+  <styled.div>
+    <Styled(WithStyles(Typography)) error={0}>
+      From: *
+    </Styled(WithStyles(Typography))>
+    <Styled(WithStyles(WithFormControlContext(NativeSelect))) value=\\"\\" onChange={[Function]} name=\\"from\\">
+      <option value=\\"\\">
+        Select a currency
+      </option>
+      <option value=\\"USD\\">
+        USD - United States Dollar
+      </option>
+      <option value=\\"GBP\\">
+        GBP - British Pound Sterling
+      </option>
+      <option value=\\"EUR\\">
+        EUR - Euro
+      </option>
+    </Styled(WithStyles(WithFormControlContext(NativeSelect)))>
+  </styled.div>
+  <styled.div>
+    <Styled(WithStyles(Typography)) error={0}>
+      To: *
+    </Styled(WithStyles(Typography))>
+    <Styled(WithStyles(WithFormControlContext(NativeSelect))) value=\\"\\" onChange={[Function]} name=\\"to\\">
+      <option value=\\"\\">
+        Select a currency
+      </option>
+      <option value=\\"USD\\">
+        USD - United States Dollar
+      </option>
+      <option value=\\"GBP\\">
+        GBP - British Pound Sterling
+      </option>
+      <option value=\\"EUR\\">
+        EUR - Euro
+      </option>
+    </Styled(WithStyles(WithFormControlContext(NativeSelect)))>
+  </styled.div>
+  <div>
+    <Styled(WithStyles(Button)) variant=\\"outlined\\" color=\\"secondary\\" onClick={[Function]}>
+      Cancel
+    </Styled(WithStyles(Button))>
+    <Styled(WithStyles(Button)) id=\\"confirm-add-currency\\" variant=\\"contained\\" color=\\"primary\\" onClick={[Function]}>
+      Add new
+    </Styled(WithStyles(Button))>
+  </div>
+</Styled(WithStyles(Paper))>"
+`;
+
+exports[`Rates Following USD to GBP 3`] = `
+"<Styled(WithStyles(Paper)) elevation={1}>
+  <WithStyles(Typography) variant=\\"h4\\" align=\\"center\\">
+    Rates
+  </WithStyles(Typography)>
+  <WithStyles(Typography) variant=\\"caption\\" align=\\"center\\" paragraph={true}>
+    Keep track of your favorites exchanges.
+  </WithStyles(Typography)>
+  <WithStyles(Table)>
+    <WithStyles(TableBody)>
+      <Styled(WithStyles(TableRow))>
+        <WithStyles(TableCell)>
+          <WithStyles(Typography) variant=\\"h5\\">
+            1 USD
+          </WithStyles(Typography)>
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell) align=\\"right\\">
+          <styled.div>
+            <WithStyles(Typography) variant=\\"h5\\">
+              0.78
+            </WithStyles(Typography)>
+            <WithStyles(Typography) variant=\\"caption\\">
+              British Pound Sterling
+            </WithStyles(Typography)>
+          </styled.div>
+          <Styled(WithStyles(IconButton)) onClick={[Function: onClick]}>
+            <pure(DeleteIcon) fontSize=\\"small\\" />
+          </Styled(WithStyles(IconButton))>
+        </WithStyles(TableCell)>
+      </Styled(WithStyles(TableRow))>
+    </WithStyles(TableBody)>
+  </WithStyles(Table)>
+  <styled.div>
+    <Styled(WithStyles(Typography)) error={0}>
+      From: *
+    </Styled(WithStyles(Typography))>
+    <Styled(WithStyles(WithFormControlContext(NativeSelect))) value=\\"\\" onChange={[Function]} name=\\"from\\">
+      <option value=\\"\\">
+        Select a currency
+      </option>
+      <option value=\\"USD\\">
+        USD - United States Dollar
+      </option>
+      <option value=\\"GBP\\">
+        GBP - British Pound Sterling
+      </option>
+      <option value=\\"EUR\\">
+        EUR - Euro
+      </option>
+    </Styled(WithStyles(WithFormControlContext(NativeSelect)))>
+  </styled.div>
+  <styled.div>
+    <Styled(WithStyles(Typography)) error={0}>
+      To: *
+    </Styled(WithStyles(Typography))>
+    <Styled(WithStyles(WithFormControlContext(NativeSelect))) value=\\"\\" onChange={[Function]} name=\\"to\\">
+      <option value=\\"\\">
+        Select a currency
+      </option>
+      <option value=\\"USD\\">
+        USD - United States Dollar
+      </option>
+      <option value=\\"GBP\\">
+        GBP - British Pound Sterling
+      </option>
+      <option value=\\"EUR\\">
+        EUR - Euro
+      </option>
+    </Styled(WithStyles(WithFormControlContext(NativeSelect)))>
+  </styled.div>
+  <div>
+    <Styled(WithStyles(Button)) variant=\\"outlined\\" color=\\"secondary\\" onClick={[Function]}>
+      Cancel
+    </Styled(WithStyles(Button))>
+    <Styled(WithStyles(Button)) id=\\"confirm-add-currency\\" variant=\\"contained\\" color=\\"primary\\" onClick={[Function]}>
+      Add new
+    </Styled(WithStyles(Button))>
+  </div>
+</Styled(WithStyles(Paper))>"
+`;
+
+exports[`Rates Following USD to GBP 4`] = `
+"<Styled(WithStyles(Paper)) elevation={1}>
+  <WithStyles(Typography) variant=\\"h4\\" align=\\"center\\">
+    Rates
+  </WithStyles(Typography)>
+  <WithStyles(Typography) variant=\\"caption\\" align=\\"center\\" paragraph={true}>
+    Keep track of your favorites exchanges.
+  </WithStyles(Typography)>
+  <WithStyles(Table)>
+    <WithStyles(TableBody)>
+      <Styled(WithStyles(TableRow))>
+        <WithStyles(TableCell)>
+          <WithStyles(Typography) variant=\\"h5\\">
+            1 USD
+          </WithStyles(Typography)>
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell) align=\\"right\\">
+          <styled.div>
+            <WithStyles(Typography) variant=\\"h5\\">
+              0.78
+            </WithStyles(Typography)>
+            <WithStyles(Typography) variant=\\"caption\\">
+              British Pound Sterling
+            </WithStyles(Typography)>
+          </styled.div>
+          <Styled(WithStyles(IconButton)) onClick={[Function: onClick]}>
+            <pure(DeleteIcon) fontSize=\\"small\\" />
+          </Styled(WithStyles(IconButton))>
+        </WithStyles(TableCell)>
+      </Styled(WithStyles(TableRow))>
+    </WithStyles(TableBody)>
+  </WithStyles(Table)>
+  <styled.div>
+    <Styled(WithStyles(Typography)) error={0}>
+      From: *
+    </Styled(WithStyles(Typography))>
+    <Styled(WithStyles(WithFormControlContext(NativeSelect))) value=\\"\\" onChange={[Function]} name=\\"from\\">
+      <option value=\\"\\">
+        Select a currency
+      </option>
+      <option value=\\"USD\\">
+        USD - United States Dollar
+      </option>
+      <option value=\\"GBP\\">
+        GBP - British Pound Sterling
+      </option>
+      <option value=\\"EUR\\">
+        EUR - Euro
+      </option>
+    </Styled(WithStyles(WithFormControlContext(NativeSelect)))>
+  </styled.div>
+  <styled.div>
+    <Styled(WithStyles(Typography)) error={0}>
+      To: *
+    </Styled(WithStyles(Typography))>
+    <Styled(WithStyles(WithFormControlContext(NativeSelect))) value=\\"\\" onChange={[Function]} name=\\"to\\">
+      <option value=\\"\\">
+        Select a currency
+      </option>
+      <option value=\\"USD\\">
+        USD - United States Dollar
+      </option>
+      <option value=\\"GBP\\">
+        GBP - British Pound Sterling
+      </option>
+      <option value=\\"EUR\\">
+        EUR - Euro
+      </option>
+    </Styled(WithStyles(WithFormControlContext(NativeSelect)))>
+  </styled.div>
+  <div>
+    <Styled(WithStyles(Button)) variant=\\"outlined\\" color=\\"secondary\\" onClick={[Function]}>
+      Cancel
+    </Styled(WithStyles(Button))>
+    <Styled(WithStyles(Button)) id=\\"confirm-add-currency\\" variant=\\"contained\\" color=\\"primary\\" onClick={[Function]}>
+      Add new
+    </Styled(WithStyles(Button))>
+  </div>
+</Styled(WithStyles(Paper))>"
+`;
+
+exports[`Rates Following USD to GBP 5`] = `
+"<Styled(WithStyles(Paper)) elevation={1}>
+  <WithStyles(Typography) variant=\\"h4\\" align=\\"center\\">
+    Rates
+  </WithStyles(Typography)>
+  <WithStyles(Typography) variant=\\"caption\\" align=\\"center\\" paragraph={true}>
+    Keep track of your favorites exchanges.
+  </WithStyles(Typography)>
+  <WithStyles(Table)>
+    <WithStyles(TableBody)>
+      <Styled(WithStyles(TableRow))>
+        <WithStyles(TableCell)>
+          <WithStyles(Typography) variant=\\"h5\\">
+            1 USD
+          </WithStyles(Typography)>
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell) align=\\"right\\">
+          <styled.div>
+            <WithStyles(Typography) variant=\\"h5\\">
+              0.78
+            </WithStyles(Typography)>
+            <WithStyles(Typography) variant=\\"caption\\">
+              British Pound Sterling
+            </WithStyles(Typography)>
+          </styled.div>
+          <Styled(WithStyles(IconButton)) onClick={[Function: onClick]}>
+            <pure(DeleteIcon) fontSize=\\"small\\" />
+          </Styled(WithStyles(IconButton))>
+        </WithStyles(TableCell)>
+      </Styled(WithStyles(TableRow))>
+    </WithStyles(TableBody)>
+  </WithStyles(Table)>
+  <styled.div>
+    <Styled(WithStyles(Typography)) error={1}>
+      From: *
+    </Styled(WithStyles(Typography))>
+    <Styled(WithStyles(WithFormControlContext(NativeSelect))) value=\\"\\" onChange={[Function]} name=\\"from\\">
+      <option value=\\"\\">
+        Select a currency
+      </option>
+      <option value=\\"USD\\">
+        USD - United States Dollar
+      </option>
+      <option value=\\"GBP\\">
+        GBP - British Pound Sterling
+      </option>
+      <option value=\\"EUR\\">
+        EUR - Euro
+      </option>
+    </Styled(WithStyles(WithFormControlContext(NativeSelect)))>
+  </styled.div>
+  <styled.div>
+    <Styled(WithStyles(Typography)) error={1}>
+      To: *
+    </Styled(WithStyles(Typography))>
+    <Styled(WithStyles(WithFormControlContext(NativeSelect))) value=\\"\\" onChange={[Function]} name=\\"to\\">
+      <option value=\\"\\">
+        Select a currency
+      </option>
+      <option value=\\"USD\\">
+        USD - United States Dollar
+      </option>
+      <option value=\\"GBP\\">
+        GBP - British Pound Sterling
+      </option>
+      <option value=\\"EUR\\">
+        EUR - Euro
+      </option>
+    </Styled(WithStyles(WithFormControlContext(NativeSelect)))>
+  </styled.div>
+  <div>
+    <Styled(WithStyles(Button)) variant=\\"outlined\\" color=\\"secondary\\" onClick={[Function]}>
+      Cancel
+    </Styled(WithStyles(Button))>
+    <Styled(WithStyles(Button)) id=\\"confirm-add-currency\\" variant=\\"contained\\" color=\\"primary\\" onClick={[Function]}>
+      Add new
+    </Styled(WithStyles(Button))>
+  </div>
 </Styled(WithStyles(Paper))>"
 `;

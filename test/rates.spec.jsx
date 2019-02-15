@@ -25,5 +25,17 @@ describe('Rates', () => {
       />
     )
     expect(component.debug()).toMatchSnapshot()
+    component.find('#add-currency').simulate('click')
+    expect(component.debug()).toMatchSnapshot()
+    component.find('[name="from"]').simulate('change', {
+      target: { value: 'USD' },
+    })
+    expect(component.debug()).toMatchSnapshot()
+    component.find('[name="to"]').simulate('change', {
+      target: { value: 'EUR' },
+    })
+    expect(component.debug()).toMatchSnapshot()
+    component.find('#confirm-add-currency').simulate('click')
+    expect(component.debug()).toMatchSnapshot()
   })
 })
