@@ -105,14 +105,17 @@ class Exchange extends PureComponent {
   }
 
   handleChange = event => {
-    const { max } = this.state
+    const { max, error } = this.state
     const { value } = event.target
     const getValue = value === '' ? '0' : value
     const isValidNumber = new RegExp(/^[0-9]+([\.,][0-9]{0,2})?$/gm)
       .test(getValue)
     const hasAmount = parseFloat(getValue.replace(',', '.')) <= max
     if (isValidNumber) {
-      this.setState({ convert: value, error: !hasAmount })
+      this.setState(prevState => ({
+        convert: error && !hasAmount ? prevState.convert : value,
+        error: !hasAmount,
+      }))
     }
   }
 
