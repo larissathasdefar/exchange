@@ -51,5 +51,10 @@ module.exports = env => {
       port: 3000,
       open: true,
     },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      }
+    }
   })
 }

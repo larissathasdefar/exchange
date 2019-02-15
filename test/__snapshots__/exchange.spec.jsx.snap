@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Exchange Having 2 pockets 1`] = `
+"<Styled(WithStyles(Paper)) elevation={1}>
+  <WithStyles(Typography) variant=\\"h4\\" align=\\"center\\">
+    Let&#39;s Exchange
+  </WithStyles(Typography)>
+  <WithStyles(Typography) variant=\\"caption\\" align=\\"center\\" paragraph={true}>
+    How much would you like to exchange?
+  </WithStyles(Typography)>
+  <styled.div>
+    <CustomStepper steps={{...}} start={0} renderStep={[Function]} onChangeStep={[Function]} align=\\"inherit\\" />
+  </styled.div>
+  <Styled(pure(SwapVertIcon)) />
+  <styled.div>
+    <CustomStepper steps={{...}} start={1} renderStep={[Function]} onChangeStep={[Function]} align=\\"inherit\\" />
+  </styled.div>
+  <styled.div>
+    <Styled(WithStyles(Button)) variant=\\"outlined\\" color=\\"secondary\\" onClick={[Function: onClick]}>
+      Cancel
+    </Styled(WithStyles(Button))>
+    <WithStyles(Button) variant=\\"contained\\" color=\\"primary\\" disabled={false} onClick={[Function]}>
+      Exchange
+      <pure(AttachMoneyIcon) />
+    </WithStyles(Button)>
+  </styled.div>
+  <WithStyles(Dialog) open={false} onClose={[Function]}>
+    <WithStyles(DialogTitle)>
+      Error
+    </WithStyles(DialogTitle)>
+    <WithStyles(DialogContent)>
+      <WithStyles(DialogContentText)>
+        You must fill the field with a number.
+      </WithStyles(DialogContentText)>
+    </WithStyles(DialogContent)>
+    <WithStyles(DialogActions)>
+      <Styled(WithStyles(Button)) variant=\\"contained\\" color=\\"primary\\" onClick={[Function]}>
+        Close
+      </Styled(WithStyles(Button))>
+    </WithStyles(DialogActions)>
+  </WithStyles(Dialog)>
+</Styled(WithStyles(Paper))>"
+`;

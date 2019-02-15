@@ -14,5 +14,6 @@
         "containers/*": ["src/containers/*"],
         "constants/*": ["src/constants/action-types.js"],
       },
-  }
+  },
+  "exclude": ["node_modules", "build"],
 }

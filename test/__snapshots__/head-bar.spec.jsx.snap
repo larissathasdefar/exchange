@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeadBar Empty user 1`] = `
+"<styled.div>
+  <img src={{...}} />
+  <styled.div>
+    <WithStyles(Typography)>
+      Bank
+    </WithStyles(Typography)>
+    <Styled(WithStyles(Typography)) onClick={[Function: onClick]}>
+      Exchange
+    </Styled(WithStyles(Typography))>
+    <pure(AccountCircleIcon) fontSize=\\"large\\" />
+  </styled.div>
+</styled.div>"
+`;
+
+exports[`HeadBar User with photo 1`] = `
+"<styled.div>
+  <img src={{...}} />
+  <styled.div>
+    <WithStyles(Typography)>
+      Bank
+    </WithStyles(Typography)>
+    <Styled(WithStyles(Typography)) onClick={[Function: onClick]}>
+      Exchange
+    </Styled(WithStyles(Typography))>
+    <WithStyles(Tooltip) title=\\"Larissa Farias\\">
+      <styled.div image=\\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/640px-React-icon.svg.png\\" alt=\\"Larissa Farias\\" />
+    </WithStyles(Tooltip)>
+  </styled.div>
+</styled.div>"
+`;
+
+exports[`HeadBar User without photo 1`] = `
+"<styled.div>
+  <img src={{...}} />
+  <styled.div>
+    <WithStyles(Typography)>
+      Bank
+    </WithStyles(Typography)>
+    <Styled(WithStyles(Typography)) onClick={[Function: onClick]}>
+      Exchange
+    </Styled(WithStyles(Typography))>
+    <WithStyles(Tooltip) title=\\"Larissa Farias\\">
+      <pure(AccountCircleIcon) fontSize=\\"large\\" />
+    </WithStyles(Tooltip)>
+  </styled.div>
+</styled.div>"
+`;

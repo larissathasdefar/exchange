@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Transactions Having 1 trasaction history 1`] = `
+"<Styled(WithStyles(Paper)) elevation={1}>
+  <WithStyles(Typography) variant=\\"h5\\" align=\\"center\\" paragraph={true}>
+    Transactions
+  </WithStyles(Typography)>
+  <WithStyles(Table)>
+    <WithStyles(TableBody)>
+      <WithStyles(TableRow)>
+        <WithStyles(TableCell)>
+          <WithStyles(Typography) variant=\\"h5\\">
+            Exchanged to GBP
+          </WithStyles(Typography)>
+          <WithStyles(Typography) variant=\\"caption\\">
+            22 Dec 2018 - 08:55
+          </WithStyles(Typography)>
+        </WithStyles(TableCell)>
+        <WithStyles(TableCell) align=\\"right\\">
+          <WithStyles(Typography) variant=\\"h5\\">
+            - € 15,00
+          </WithStyles(Typography)>
+          <Styled(WithStyles(Typography)) variant=\\"caption\\">
+            + £ 3,19
+          </Styled(WithStyles(Typography))>
+        </WithStyles(TableCell)>
+      </WithStyles(TableRow)>
+    </WithStyles(TableBody)>
+  </WithStyles(Table)>
+</Styled(WithStyles(Paper))>"
+`;
+
+exports[`Transactions Having no trasactions history 1`] = `
+"<Styled(WithStyles(Paper)) elevation={1}>
+  <WithStyles(Typography) variant=\\"h5\\" align=\\"center\\" paragraph={true}>
+    Transactions
+  </WithStyles(Typography)>
+  <WithStyles(Typography) align=\\"center\\">
+    You don&#39;t have transactions yet.
+  </WithStyles(Typography)>
+</Styled(WithStyles(Paper))>"
+`;

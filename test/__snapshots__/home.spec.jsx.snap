@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Having 2 pockets 1`] = `
+"<Styled(WithStyles(Paper)) elevation={1}>
+  <styled.div>
+    <Styled(WithStyles(Typography)) variant=\\"h4\\" paragraph={true}>
+      Pockets
+    </Styled(WithStyles(Typography))>
+    <CustomStepper steps={{...}} align=\\"center\\" textStyle={{...}} iconStyle={{...}} start={0} />
+  </styled.div>
+  <styled.div>
+    <WithStyles(Button) variant=\\"outlined\\" onClick={[Function: onClick]}>
+      Exchange
+    </WithStyles(Button)>
+  </styled.div>
+</Styled(WithStyles(Paper))>"
+`;
